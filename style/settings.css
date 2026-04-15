@@ -22,3 +22,12 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 0.95rem;
 }
+
+p > a, label > a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+p > a:hover, label > a:hover {
+    text-decoration: underline;
+}
