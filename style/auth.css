@@ -63,4 +63,5 @@
 .auth-form .footer a {
     color: var(--black);
     font-weight: 700;
+    text-decoration: underline;
 }
