@@ -60,8 +60,12 @@
     transition-duration: 0.4s;
 }
 
-.auth-form .footer a {
+.auth-form .footer a, .auth-form .reset-pass a {
     color: var(--black);
     font-weight: 700;
     text-decoration: underline;
+}
+
+.auth-form .reset-pass {
+    margin: 0 0 10px 0;
 }
