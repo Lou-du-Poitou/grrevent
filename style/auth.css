@@ -17,7 +17,7 @@
     margin: 20px;
 }
 
-.auth-form input {
+.auth-form input:not(#cgu-check) {
     margin: 10px 20px;
     outline: none;
     padding: 8px;
@@ -27,6 +27,18 @@
 
 .auth-form input:focus {
     box-shadow: 0 0 8px 1px var(--grey);
+}
+
+.auth-form .cgu-check {
+    justify-self: start;
+    margin: 10px 20px;
+}
+
+.auth-form .cgu-check * {
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .auth-form button[type='submit'] {
@@ -48,7 +60,7 @@
     transition-duration: 0.4s;
 }
 
-.auth-form a {
+.auth-form .footer a {
     color: var(--black);
     font-weight: 700;
 }
