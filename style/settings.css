@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: unset;
+    list-style-type: none;
+}
+
+/* Variables des différentes couleurs */
+:root {
+    --white: #f8f8f8;
+    --black: #252525;
+    --grey: #dbdbdb;
+
+    --header: #eeeeee;
+}
+
+body {
+    min-width: 320px;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.95rem;
+}
+
+p > a, label > a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+p > a:hover, label > a:hover {
+    text-decoration: underline;
+}

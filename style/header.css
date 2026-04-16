@@ -1,28 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: unset;
-    list-style-type: none;
-}
-
-/* Variables des différentes couleurs */
-:root {
-    --white: #f8f8f8;
-    --black: #252525;
-    --grey: #dbdbdb;
-
-    --header: #eeeeee;
-}
-
-body {
-    min-width: 320px;
-    background-color: var(--white);
-    color: var(--black);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 0.95rem;
-}
-
 /* En-tête du site */
 header {
     display: flex;
@@ -63,7 +38,7 @@ header .icon {
     pointer-events: none;
 }
 
-header .nav-item {
+header .header-item {
     color: var(--black);
     padding: 8px;
     border-radius: 5px;
@@ -73,7 +48,7 @@ header .nav-item {
     transition-duration: 0.4s;
 }
 
-header .nav-item:hover {
+header .header-item:hover {
     background-color: var(--grey);
 }
 
@@ -129,7 +104,7 @@ main {
         font-size: 1.2rem;
     }
 
-    header .nav-item {
+    header .header-item {
         padding: 8px 4px;
         margin: 3px;
     }
