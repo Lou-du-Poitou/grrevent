@@ -15,3 +15,5 @@ function connection() {
 
     return $db;
 }
+
+define('DB_ERROR_MESSAGE', 'Erreur base de données:');
