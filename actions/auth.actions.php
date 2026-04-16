@@ -61,7 +61,7 @@ SQL;
         $state->setFetchMode(PDO::FETCH_CLASS, 'User');
         $user = $state->fetch();
     } catch (PDOException $err) {
-        errorExit("Erreur base de données:", $err);
+        errorExit(DB_ERROR_MESSAGE, $err);
     }
     
     return $user;
@@ -102,7 +102,7 @@ SQL;
         $data = $state->fetch();
         $duplicate = (bool)$data['duplicate'];
     } catch (PDOException $err) {
-        errorExit("Erreur base de données:", $err);
+        errorExit(DB_ERROR_MESSAGE, $err);
     }
 
     return $duplicate;
@@ -143,7 +143,7 @@ SQL;
             $user = new User($data);
         }
     } catch (PDOException $err) {
-        errorExit("Erreur base de données:", $err);
+        errorExit(DB_ERROR_MESSAGE, $err);
     }
 
     return $user;
