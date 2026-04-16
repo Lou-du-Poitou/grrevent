@@ -2,7 +2,7 @@
 require_once './config/connection.php';
 require_once './class/User.php';
 
-require_once './elements/erreur.exit.php';
+require_once './elements/error.exit.php';
 
 function register(PDO $db, string $pseudo, string $email, string $password): User | null
 /**
