@@ -29,7 +29,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
         isset($_POST['confirm']) && !empty($_POST['confirm']) &&
         count($_POST) === 4
     ) {
-        $pseudo = $_POST['pseudo'];
+        $pseudo = strtolower($_POST['pseudo']);
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirm = $_POST['confirm'];
@@ -47,15 +47,22 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
             } else {
                 // Continue
                 $db = connection();
-                $user = register($db, $pseudo, $email, $password);
-                
-                if ($user) {
-                    session_start();
-                    $_SESSION['user'] = $user;
 
-                    header('Location: _debug.php');
+                // On vérifie que le pseudo/email n'est pas déjà pris
+                $duplicate = duplicateEmailPseudo($db, $pseudo, $email);
+                if (!$duplicate) {
+                    $user = register($db, $pseudo, $email, $password);
+                    
+                    if ($user) {
+                        session_start();
+                        $_SESSION['user'] = $user;
+
+                        header('Location: _debug.php');
+                    } else {
+                        $erreur = "Erreur de la base de données";
+                    }
                 } else {
-                    $erreur = "Erreur de la base de données";
+                    $erreur = "Email ou pseudo déjà pris";
                 }
             }
         } else {
