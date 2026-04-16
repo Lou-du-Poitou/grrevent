@@ -1,14 +1,14 @@
 <?php
 
 class Entity {
-    public function getHTML(string $key): string | null
+    public function getHTML(string $key): string
     /**
      * Renvoie la valeur associé une clé d'une entité puis encode les entitées HTML
      * (ex: $user->getHTML('userPseudo');)
      * 
      * @var string $key 
      * 
-     * @return mixed
+     * @return string
      */
     {
         $value = '';
