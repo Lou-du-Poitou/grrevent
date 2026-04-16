@@ -2,6 +2,8 @@
 require_once './config/connection.php';
 require_once './class/User.php';
 
+require_once './elements/erreur.exit.php';
+
 function register(PDO $db, string $pseudo, string $email, string $password): User | null
 /**
  * Permet d'inscrire un nouvel utilisateur dans la base de données
@@ -12,7 +14,7 @@ function register(PDO $db, string $pseudo, string $email, string $password): Use
  * @var string $password
  * 
  * @return User L'utilisateur inséré si tout s'est bien passé
- * @return null En cas d'erreur
+ * @return null
  */
 {
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -59,13 +61,13 @@ SQL;
         $state->setFetchMode(PDO::FETCH_CLASS, 'User');
         $user = $state->fetch();
     } catch (PDOException $err) {
-        return null;
+        errorExit("Erreur base de données:", $err);
     }
     
     return $user;
 }
 
-function duplicateEmailPseudo(PDO $db, string $pseudo, string $email): bool | null
+function duplicateEmailPseudo(PDO $db, string $pseudo, string $email): bool
 /**
  * Vérifie si le pseudo ou l'email est déjà utilisé
  * 
@@ -76,7 +78,6 @@ function duplicateEmailPseudo(PDO $db, string $pseudo, string $email): bool | nu
  * @return bool
  * true: Si pseudo/email déjà pris
  * false: Si pseudo/email libre
- * @return null En cas d'erreur
  */
 {
     $duplicate = false;
@@ -101,7 +102,7 @@ SQL;
         $data = $state->fetch();
         $duplicate = (bool)$data['duplicate'];
     } catch (PDOException $err) {
-        return null;
+        errorExit("Erreur base de données:", $err);
     }
 
     return $duplicate;
@@ -119,6 +120,8 @@ function login(PDO $db ,string $email, string $password): User | null
  * @return null Si id/mdp invalide
  */
 {
+    $user = null;
+
     try {
         $sql = <<<'SQL'
         SELECT userId,
@@ -136,12 +139,11 @@ SQL;
         $state->execute();
 
         $data = $state->fetch(PDO::FETCH_ASSOC);
-        $user = null;
         if (isset($data['userPassword']) && password_verify($password, $data['userPassword'])) {
             $user = new User($data);
         }
     } catch (PDOException $err) {
-        return null;
+        errorExit("Erreur base de données:", $err);
     }
 
     return $user;
