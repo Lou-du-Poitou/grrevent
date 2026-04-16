@@ -33,11 +33,12 @@ SQL;
 
         $state = $db->prepare($insertSql);
 
-        $state->bindParam(":pseudo", $pseudo, PDO::PARAM_STR);
-        $state->bindParam(":email", $email, PDO::PARAM_STR);
-        $state->bindParam(":password", $password, PDO::PARAM_STR);
+        $state->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+        $state->bindParam(':email', $email, PDO::PARAM_STR);
+        $state->bindParam(':password', $password, PDO::PARAM_STR);
 
         $state->execute();
+        $state->closeCursor();
 
         // Selection du nouvel utilisateur
         $selectSql = <<<'SQL'
@@ -52,7 +53,7 @@ SQL;
         $userId = $db->lastInsertId();
 
         $state = $db->prepare($selectSql);
-        $state->bindParam(":id", $userId);
+        $state->bindParam(':id', $userId);
         $state->execute();
 
         $state->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -104,4 +105,44 @@ SQL;
     }
 
     return $duplicate;
+}
+
+function login(PDO $db ,string $email, string $password): User | null
+/**
+ * Renvoie l'utilisateur qui essaye de se connecter
+ * 
+ * @var PDO $db Handle de connexion à la base de données
+ * @var string $email
+ * @var string $password
+ * 
+ * @return User Connexion réussi
+ * @return null Si id/mdp invalide
+ */
+{
+    try {
+        $sql = <<<'SQL'
+        SELECT userId,
+            userPseudo,
+            userName,
+            userBiography,
+            userPicture,
+            userPassword
+        FROM User
+        WHERE userEmail = :email;
+SQL;
+
+        $state = $db->prepare($sql);
+        $state->bindParam(':email', $email);
+        $state->execute();
+
+        $data = $state->fetch(PDO::FETCH_ASSOC);
+        $user = null;
+        if (isset($data['userPassword']) && password_verify($password, $data['userPassword'])) {
+            $user = new User($data);
+        }
+    } catch (PDOException $err) {
+        return null;
+    }
+
+    return $user;
 }
