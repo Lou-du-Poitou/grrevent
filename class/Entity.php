@@ -1,6 +1,20 @@
 <?php
 
 class Entity {
+    public function __construct(array $data=[])
+    /**
+     * Constructeur, remplit automatiquement les propriétés
+     * 
+     * @var array $data
+     */
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
     public function getHTML(string $key): string
     /**
      * Renvoie la valeur associé une clé d'une entité puis encode les entitées HTML
@@ -29,8 +43,8 @@ class Entity {
      * @return mixed
      */
     {
-        $value = '';
-        if (isset($this->$key) && !empty($this->$key)) {
+        $value = null;
+        if (isset($this->$key)) {
             $value = $this->$key;
         }
 
