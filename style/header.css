@@ -38,7 +38,7 @@ header .icon {
     pointer-events: none;
 }
 
-header .nav-item {
+header .header-item {
     color: var(--black);
     padding: 8px;
     border-radius: 5px;
@@ -48,7 +48,7 @@ header .nav-item {
     transition-duration: 0.4s;
 }
 
-header .nav-item:hover {
+header .header-item:hover {
     background-color: var(--grey);
 }
 
@@ -104,7 +104,7 @@ main {
         font-size: 1.2rem;
     }
 
-    header .nav-item {
+    header .header-item {
         padding: 8px 4px;
         margin: 3px;
     }
