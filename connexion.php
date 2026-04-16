@@ -39,6 +39,8 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'connexi
             } else {
                 $erreur = "Identifiant ou mot de passe invalide";
             }
+
+            $db = null;
         }
     }
 }
