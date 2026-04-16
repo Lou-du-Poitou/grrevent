@@ -67,10 +67,12 @@ CREATE TABLE IF NOT EXISTS `User` (
     `userPicture` VARCHAR(250)
         -- REGEX url ou chemin d'accès à voire
         CHECK (`userPicture` REGEXP "^http(s)?:\/\/[-.a-z0-9]+\.[a-z]{2,}\/[-.\/a-zA-Z0-9_]+[a-z]{2,}$"),
+    /*
     `userBirthday` DATETIME NOT NULL,
     `userVisibility` BIT(2) NOT NULL
         DEFAULT 0,
-    -- `userLocation` ,-- Un peu chiant on verra
+    */
+    `userLocation` VARCHAR(50),
     `userJoinedAt` DATETIME NOT NULL 
         DEFAULT CURRENT_TIMESTAMP,
 
@@ -85,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Event` (
     `eventTitle` VARCHAR(120) NOT NULL,
     `eventDescription` VARCHAR(500) NOT NULL,
     `eventDate` DATETIME NOT NULL,
-    -- `eventLocation` ,-- Un peu chiant on verra
+    `eventLocation` VARCHAR(50),
     `eventPlaces` INT UNSIGNED -- On peut passer à BIGINT (à voire)
         DEFAULT NULL,
 
@@ -148,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `UserFollowUser` (
 
 -- II: Partie support de l'application
 -- -------------------------------- --
-
+-- /!\ PAS LE TEMPS /!\ --
+/*
 -- Table contenant les utilisateurs support
 CREATE TABLE IF NOT EXISTS `Support` (
     `supportId` BIGINT UNSIGNED NOT NULL,
@@ -204,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `Message` (
 
     PRIMARY KEY (`messageId`)
 );
-
+*/
 /**
 * /!\ Lire la convention en haut de page avant
 * de commencer à modifier le fichier
