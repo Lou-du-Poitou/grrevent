@@ -64,6 +64,8 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
                 } else {
                     $erreur = "Email ou pseudo déjà pris";
                 }
+
+                $db = null;
             }
         } else {
             $erreur = "Bien tenté !";
