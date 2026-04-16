@@ -2,7 +2,10 @@
 L'importer au début à chaques page:
 require './elements/header.php';
 -->
-<?php require_once './elements/nav.php' ?>
+<?php 
+
+require_once './elements/nav.php';
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,7 +16,7 @@ require './elements/header.php';
     <title><?= isset($title) ? $title : 'Nom site' ?></title>
 
     <link rel="icon" 
-        href="path_to_icon"
+        href="https://res.cloudinary.com/dss2ops7q/image/upload/v1775053775/posts/2_1775053775052.webp"
     >
 
     <link rel="stylesheet" 
@@ -36,13 +39,13 @@ require './elements/header.php';
 
         <ul class="options">
             <li>
-                <a class="nav-item" href="account.php">
+                <a class="header-item" href="account.php">
                     <i class="fas fa-user"></i>
                 </a>
             </li>
 
             <li>
-                <label class="nav-item">
+                <label class="header-item">
                     <input id="togglenav" type="checkbox" hidden>
                     <i class="fas fa-bars"></i>
                     <?= navMenu() ?>
