@@ -160,7 +160,7 @@ function requestResetPassword(PDO $db, string $email): bool
  * @var PDO $db Handle de connexion à la base de données
  * @var string $email
  * 
- * @return
+ * @return bool
  */
 {
     try {
@@ -220,7 +220,7 @@ SQL;
     return true;
 }
 
-function resetPassword(PDO $db, int $id, string $token, string $password)
+function resetPassword(PDO $db, int $id, string $token, string $password): bool
 /**
  * Permet de faire suivre la demande de réinitialisation de mot de passe
  * 
@@ -228,7 +228,7 @@ function resetPassword(PDO $db, int $id, string $token, string $password)
  * @var int $id
  * @var string $password
  * 
- * @return
+ * @return bool
  */
 {
     $password = password_hash($password, PASSWORD_DEFAULT);
