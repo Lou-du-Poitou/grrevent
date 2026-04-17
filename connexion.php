@@ -6,6 +6,8 @@ require_once './elements/inputs.php';
 
 require_once './actions/auth.actions.php';
 
+require_once './class/FormMessage.php';
+
 $title = 'Connexion';
 
 $erreur = null;
@@ -37,10 +39,12 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'connexi
 
                 header('Location: _debug.php');
             } else {
-                $erreur = "Identifiant ou mot de passe invalide";
+                $erreur = FormMessage::getError('Login');
             }
 
             $db = null;
+        } else {
+            $erreur = FormMessage::getError('ValidationRegexFail');
         }
     }
 }
@@ -56,9 +60,7 @@ require './elements/header.php';
 
         <p class="reset-pass"><a href="motpasse.php">Mot de passe oublié ?</a></p>
 
-        <button type="submit"  
-            title="Se connecter"
-        >Se connecter</button>
+        <?= buttonInput('Se connecter', 'submit') ?>
 
         <?php if ($erreur): ?>
         <!-- Erreur lors de la connexion -->
