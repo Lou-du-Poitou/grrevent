@@ -1,6 +1,10 @@
 <?php
 
-class Entity {
+class Entity
+/**
+ * Entité de l'application (ex: Utilisateur)
+ */
+{
     public function __construct(array $data=[])
     /**
      * Constructeur, remplit automatiquement les propriétés
@@ -13,24 +17,6 @@ class Entity {
                 $this->$key = $value;
             }
         }
-    }
-
-    public function getHTML(string $key): string
-    /**
-     * Renvoie la valeur associé une clé d'une entité puis encode les entitées HTML
-     * (ex: $user->getHTML('userPseudo');)
-     * 
-     * @var string $key 
-     * 
-     * @return string
-     */
-    {
-        $value = '';
-        if (isset($this->$key) && !empty($this->$key)) {
-            $value = (string)$this->$key;
-        }
-
-        return htmlspecialchars($value);
     }
 
     public function getValue(string $key): mixed 
@@ -46,8 +32,25 @@ class Entity {
         $value = null;
         if (isset($this->$key)) {
             $value = $this->$key;
+        } else {
+            throw new Exception('propriété invalide');
         }
 
         return $value;
+    }
+
+    public function getHTML(string $key): string
+    /**
+     * Renvoie la valeur associé une clé d'une entité puis encode les entitées HTML
+     * (ex: $user->getHTML('userPseudo');)
+     * 
+     * @var string $key 
+     * 
+     * @return string
+     */
+    {
+        $value = (string)$this->getValue($key);
+
+        return htmlspecialchars($value);
     }
 }
