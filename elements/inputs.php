@@ -74,9 +74,32 @@ function pseudoInput(string $name, string $placeholder='', string $value=''): st
         name="$name"
         placeholder="$placeholder"
         pattern="$regex"
+        title="3 caractères minimum, lettres minuscules, chiffres et _"
         value="$value"
         required
     >
+HTML;
+
+    return $html;
+}
+
+function buttonInput(string $title, string $type='button', bool $disabled=false): string
+/**
+ * Bouton classique
+ * 
+ * @var string $title Titre et valeur du bouton
+ * @var string $type='button' Type du bouton
+ * 
+ * @return string (Composant html)
+ */
+{
+    $disabled = $disabled ? 'disabled' : '';
+
+    $html = <<<HTML
+    <button type="$type"  
+        title="$title"
+        $disabled
+    >$title</button>
 HTML;
 
     return $html;

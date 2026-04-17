@@ -148,6 +148,20 @@ CREATE TABLE IF NOT EXISTS `UserFollowUser` (
     PRIMARY KEY (`followerId`, `followedId`)
 );
 
+-- Table contant les tokens d'un utilisateur (pour reset le mot de passe)
+CREATE TABLE IF NOT EXISTS `Token` (
+    `userId` BIGINT UNSIGNED NOT NULL,
+    `tokenValue` VARCHAR(60) NOT NULL
+        CHECK (`tokenValue` REGEXP "^[$]2[abxy]?[$](?:0[4-9]|[12][0-9]|3[01])[$][./0-9a-zA-Z]{53}$"),
+    `tokenExpires` DATETIME NOT NULL
+        DEFAULT (NOW() + INTERVAL 48 HOUR),
+
+    FOREIGN KEY (`userId`) REFERENCES `User`(`userId`)
+        ON DELETE CASCADE,
+
+    PRIMARY KEY (`userId`)
+);
+
 -- II: Partie support de l'application
 -- -------------------------------- --
 -- /!\ PAS LE TEMPS /!\ --

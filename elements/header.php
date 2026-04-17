@@ -3,6 +3,26 @@ L'importer au début à chaques page:
 require './elements/header.php';
 -->
 <?php 
+function headerItem(string $link, string $icon): string
+/**
+ * Item du header
+ * 
+ * @var string $link
+ * @var string $icon
+ * 
+ * @return string (Composant html)
+ */
+{
+    $html = <<<HTML
+    <li>
+        <a class="header-item" href="$link">
+            <i class="fas fa-$icon"></i>
+        </a>
+    </li>
+HTML;
+
+    return $html;
+}
 
 require_once './elements/nav.php';
 ?>
@@ -38,11 +58,7 @@ require_once './elements/nav.php';
         </div>
 
         <ul class="options">
-            <li>
-                <a class="header-item" href="account.php">
-                    <i class="fas fa-user"></i>
-                </a>
-            </li>
+            <?= headerItem('account.php', 'user') ?>
 
             <li>
                 <label class="header-item">

@@ -6,6 +6,8 @@ require_once './elements/inputs.php';
 
 require_once './actions/auth.actions.php';
 
+require_once './class/FormMessage.php';
+
 $title = 'Inscription';
 
 $erreur = null;
@@ -29,7 +31,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
         isset($_POST['confirm']) && !empty($_POST['confirm']) &&
         count($_POST) === 4
     ) {
-        $pseudo = strtolower($_POST['pseudo']);
+        $pseudo = $_POST['pseudo'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirm = $_POST['confirm'];
@@ -43,7 +45,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
 
         if ($ok) {
             if ($password !== $confirm) {
-                $erreur = "Les mots de passe ne correspondent pas";
+                $erreur = FormMessage::getError('PasswordNotSame');
             } else {
                 // Continue
                 $db = connection();
@@ -59,16 +61,16 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
 
                         header('Location: _debug.php');
                     } else {
-                        $erreur = "Erreur de la base de données";
+                        $erreur = FormMessage::getError('DataBase');
                     }
                 } else {
-                    $erreur = "Email ou pseudo déjà pris";
+                    $erreur = FormMessage::getError('DuplicateEmailPseudo');
                 }
 
                 $db = null;
             }
         } else {
-            $erreur = "Bien tenté !";
+            $erreur = FormMessage::getError('ValidationRegexFail');
         }
     }
 }
@@ -97,9 +99,7 @@ require './elements/header.php';
             </label>
         </span>
 
-        <button type="submit" 
-            title="Créer un compte"
-        >Créer un compte</button>
+        <?= buttonInput('Créer un compte', 'submit') ?>
 
         <?php if ($erreur): ?>
         <!-- Erreur lors de l'inscription -->
