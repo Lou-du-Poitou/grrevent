@@ -1,6 +1,6 @@
 <?php
-require './class/Entity.php';
-require './class/User.php';
+require_once './class/Entity.php';
+require_once './class/User.php';
 
 class Event extends Entity
 /**
@@ -13,6 +13,7 @@ class Event extends Entity
     protected string $eventDate;
     protected int | null $eventPlaces;
     protected string $eventLocation;
+    protected string | null $eventPicture;
 
     // Utilisateur auteur de l'événement
     protected User $author;
