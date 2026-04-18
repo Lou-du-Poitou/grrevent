@@ -1,6 +1,6 @@
 <?php 
 require_once './config/connection.php';
-require_once './config/regex.php';
+require_once './config/constants.php';
 
 require_once './elements/inputs.php';
 
@@ -8,7 +8,9 @@ require_once './actions/auth.actions.php';
 
 require_once './class/FormMessage.php';
 
+// Paramètres passés au header
 $title = 'Mot de passe oublié';
+$metaDescription = "Page à utiliser en cas d'oublie de votre mot de passe";
 
 // false si on réinitialise le mot de passe (Affichage du formulaire)
 $request = true;
