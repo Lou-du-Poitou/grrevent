@@ -22,6 +22,7 @@ header .left {
 header .left > h1 {
     font-size: 1.6rem;
     font-weight: 400;
+    font-weight: 600;
 }
 
 header .options {
@@ -60,6 +61,7 @@ header .center {
 header .center p {
     font-weight: 600;
     font-style: italic;
+    font-size: large;
 }
 
 /* Menu de navigation */
