@@ -93,7 +93,7 @@ function followUserHandler(User $user, string $referer, bool $isFollow=false): s
         $titleButton = 'Suivre';
         $iconButton = 'user-plus';
     } else {
-        $titleButton = 'Suivi';
+        $titleButton = 'Suivi·e';
         $iconButton = 'user-minus';
     }
 
