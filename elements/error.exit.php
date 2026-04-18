@@ -11,7 +11,7 @@ function errorExit(string $message, ?string $err=null): void
  */
 {
     $html = <<<HTML
-    <b><p>$message</p></b>
+    <b><p>$message:</p></b>
     <pre>$err</pre>
 HTML;
 
