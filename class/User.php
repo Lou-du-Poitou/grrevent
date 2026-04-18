@@ -1,5 +1,5 @@
 <?php
-require './class/Entity.php';
+require_once './class/Entity.php';
 
 class User extends Entity 
 /**
@@ -11,4 +11,6 @@ class User extends Entity
     protected string | null $userName;
     protected string | null $userBiography;
     protected string | null $userPicture;
+    protected string | null $userLocation;
+    protected string | null $userJoinedAt;
 }
