@@ -1,0 +1,27 @@
+/* Container de la page */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--white);
+}
+
+.container p {
+    word-wrap: break-word;
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+/* Bouton retour */
+.back-btn {
+    margin-bottom: 15px;
+}
+
+.back-btn button {
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--black);
+    background: transparent;
+    cursor: pointer;
+}
