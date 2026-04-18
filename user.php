@@ -20,6 +20,9 @@ $userBiography = null;
 $userLocation = null;
 $userJoinedAt = null;
 
+// Variable du suivi d'un utilisateur
+$isFollow = false;
+
 if (isset($_GET['pseudo'])) {
     $pseudo = $_GET['pseudo'];
     
@@ -40,6 +43,12 @@ if (isset($_GET['pseudo'])) {
             $metaImage = $user->getHTML('userPicture');
             $metaKeywords = $user->getHTML('userLocation');
 
+            // Initialisation du suivi de l'utilisateur connecté
+            $isFollow = isFollowUser($db, 
+                $logged->user()->getValue('userId'), 
+                $user->getValue('userId')
+            );
+
             // Modification des variables d'affichage
             $userId = $user->getHTML('userId');
             $userPseudo = $user->getHTML('userPseudo');
@@ -59,10 +68,6 @@ if (isset($_GET['pseudo'])) {
 
         $db = null;
     }
-}
-
-if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], '/user.php')) {
-
 }
 
 require './elements/header.php';
@@ -88,10 +93,7 @@ require './elements/header.php';
                 </h1>
 
                 <?php if ($logged->is()): ?>
-                <form>
-                    <input type="hidden" name="follow" value="<?= $userId ?>">
-                    <?= buttonInput('Suivre', 'submit', true, 'user-plus') ?>
-                </form>
+                <?= followUserHandler($user, $_SERVER['REQUEST_URI'], $isFollow) ?>
 
                 <?php endif ?>
             </div>
