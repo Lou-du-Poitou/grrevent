@@ -1,5 +1,7 @@
 <?php
-require_once './config/regex.php';
+require_once './config/constants.php';
+
+require_once './elements/icon.php';
 
 function passwordInput(string $name, string $placeholder=''): string
 /**
@@ -83,7 +85,7 @@ HTML;
     return $html;
 }
 
-function buttonInput(string $title, string $type='button', bool $disabled=false): string
+function buttonInput(string $title, string $type='button', bool $disabled=false, string $iconName=''): string
 /**
  * Bouton classique
  * 
@@ -95,11 +97,16 @@ function buttonInput(string $title, string $type='button', bool $disabled=false)
 {
     $disabled = $disabled ? 'disabled' : '';
 
+    $icon = null;
+    if ($iconName) {
+        $icon = icon($iconName) . ' ';
+    }
+
     $html = <<<HTML
     <button type="$type"  
         title="$title"
         $disabled
-    >$title</button>
+    >$icon$title</button>
 HTML;
 
     return $html;

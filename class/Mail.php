@@ -1,6 +1,5 @@
 <?php
-
-define('FROM_EMAIL_NAME', 'Nom Site');
+require_once './config/constants.php';
 
 class Mail
 /**

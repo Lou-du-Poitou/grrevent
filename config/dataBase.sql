@@ -66,7 +66,9 @@ CREATE TABLE IF NOT EXISTS `User` (
     `userBiography` VARCHAR(500),
     `userPicture` VARCHAR(250)
         -- REGEX url ou chemin d'accès à voire
-        CHECK (`userPicture` REGEXP "^http(s)?:\/\/[-.a-z0-9]+\.[a-z]{2,}\/[-.\/a-zA-Z0-9_]+[a-z]{2,}$"),
+        -- URL: ^http(s)?:\/\/[-.a-z0-9]+\.[a-z]{2,}\/[-.\/a-zA-Z0-9_]+[a-z]{2,}$
+        -- PATH: ^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$
+        CHECK (`userPicture` REGEXP "^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$"),
     /*
     `userBirthday` DATETIME NOT NULL,
     `userVisibility` BIT(2) NOT NULL
@@ -90,6 +92,11 @@ CREATE TABLE IF NOT EXISTS `Event` (
     `eventLocation` VARCHAR(50),
     `eventPlaces` INT UNSIGNED -- On peut passer à BIGINT (à voire)
         DEFAULT NULL,
+    `eventPicture` VARCHAR(250)
+        -- REGEX url ou chemin d'accès à voire
+        -- URL: ^http(s)?:\/\/[-.a-z0-9]+\.[a-z]{2,}\/[-.\/a-zA-Z0-9_]+[a-z]{2,}$
+        -- PATH: ^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$
+        CHECK (`eventPicture` REGEXP "^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$"),
 
     `userId` BIGINT UNSIGNED NOT NULL,
 
@@ -98,7 +105,8 @@ CREATE TABLE IF NOT EXISTS `Event` (
 
     PRIMARY KEY (`eventId`),
     FULLTEXT(`eventTitle`),
-    FULLTEXT(`eventDescription`)
+    FULLTEXT(`eventDescription`),
+    FULLTEXT(`eventLocation`)
 );
 
 -- Table contenant les informations d'une catégorie

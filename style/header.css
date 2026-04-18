@@ -26,8 +26,8 @@ header .left > h1 {
 
 header .options {
     display: flex;
-    position: absolute;
-    right: 0;
+    /* position: absolute; */
+    /* right: 0; */
     align-self: center;
     margin-right: 15px;
 }
@@ -50,6 +50,16 @@ header .header-item {
 
 header .header-item:hover {
     background-color: var(--grey);
+}
+
+header .center {
+    margin: 0 auto;
+    align-self: center;
+}
+
+header .center p {
+    font-weight: 600;
+    font-style: italic;
 }
 
 /* Menu de navigation */
@@ -85,6 +95,7 @@ nav li a {
 
 nav ul .active {
     font-weight: 900;
+    background-color: var(--grey);
 }
 
 /* Cache le menu lorsque la checkbox n'est pas cochée */
@@ -107,6 +118,21 @@ main {
     header .header-item {
         padding: 8px 4px;
         margin: 3px;
+    }
+
+    .profile-container .image-container {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    header .center {
+        opacity: 0;
+        width: 0;
+    }
+
+    header .center * {
+        display: none;
     }
 }
 

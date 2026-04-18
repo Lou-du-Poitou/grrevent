@@ -25,18 +25,30 @@ HTML;
     return $html;
 }
 
-function navMenu(): string
+function navMenu(bool $connected=false): string
 /**
  * Menu de navigation
+ * 
+ * @var $connected=false
  * 
  * @return string (Composant html)
  */
 {
     $items = (
-        navItem('/', 'Accueil').
+        navItem('/', 'Accueil')/*.
         navItem('', 'Autre').
-        navItem('', 'Autre')
+        navItem('', 'Autre')*/
     );
+
+    if ($connected) {
+        $items .= (
+            navItem('/deconnexion.php', 'Déconnexion')
+        );
+    } else {
+        $items .= (
+            navItem('/connexion.php', 'Se connecter')
+        );
+    }
 
     $html = <<<HTML
     <nav>

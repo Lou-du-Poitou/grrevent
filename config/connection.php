@@ -1,13 +1,17 @@
 <?php
+require_once './config/constants.php';
 require_once './elements/error.exit.php';
-
-define('DB_ERROR_MESSAGE', 'Erreur base de données:');
 
 function connection() {
     $db = null;
+
+    $host = 'localhost';
+    $charset = 'utf8';
+    $port = 3306;
+    $dbname = 'projetweb';
     
     try {
-        $dsn = 'mysql:host=localhost;charset=utf8;port=3306;dbname=projetweb';
+        $dsn = "mysql:host=$host;charset=$charset;port=$port;dbname=$dbname";
         $db = new PDO($dsn, 'root', '', [
             PDO::ATTR_PERSISTENT => true
         ]);

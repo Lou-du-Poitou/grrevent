@@ -1,14 +1,17 @@
 <?php 
 require_once './config/connection.php';
-require_once './config/regex.php';
+require_once './config/constants.php';
 
 require_once './elements/inputs.php';
 
 require_once './actions/auth.actions.php';
 
 require_once './class/FormMessage.php';
+require_once './class/Logged.php';
 
+// Paramètres passés au header
 $title = 'Inscription';
+$metaDescription = "Page d'inscription de l'application";
 
 $erreur = null;
 
@@ -56,8 +59,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'inscrip
                     $user = register($db, $pseudo, $email, $password);
                     
                     if ($user) {
-                        session_start();
-                        $_SESSION['user'] = $user;
+                        Logged::setUser($user);
 
                         header('Location: _debug.php');
                     } else {

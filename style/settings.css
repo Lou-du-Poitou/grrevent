@@ -55,3 +55,8 @@ p > a:hover, label > a:hover {
 .error {
     color: var(--red);
 }
+
+::selection {
+    color: var(--grey);
+    background-color: var(--black);
+}

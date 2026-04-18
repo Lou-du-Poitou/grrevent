@@ -58,7 +58,7 @@
     cursor: not-allowed;
 }
 
-.auth-form button[type='submit']:not(:disabled):hover {
+.auth-form button[type='submit']:hover:not(:disabled) {
     text-decoration: underline;
     background-color: var(--dark);
     transition-duration: 0.4s;

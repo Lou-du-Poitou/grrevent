@@ -8,3 +8,5 @@ ProjetWeb - L1 INF09 (c) 2026
 /* Style des composants */
 @import url("header.css");
 @import url("auth.css");
+@import url("page.css");
+@import url("profile.css");
