@@ -30,7 +30,7 @@ class Entity
      */
     {
         $value = null;
-        if (isset($this->$key)) {
+        if (property_exists($this, $key)) {
             $value = $this->$key;
         } else {
             throw new Exception('propriété invalide');
