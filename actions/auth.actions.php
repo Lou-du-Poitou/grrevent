@@ -8,7 +8,7 @@ require_once './class/HostUrl.php';
 
 require_once './elements/error.exit.php';
 
-function register(PDO $db, string $pseudo, string $email, string $password): User | null
+function register(PDO $db, string $pseudo, string $email, string $password): User | false
 /**
  * Permet d'inscrire un nouvel utilisateur dans la base de données
  * 
@@ -18,7 +18,7 @@ function register(PDO $db, string $pseudo, string $email, string $password): Use
  * @var string $password
  * 
  * @return User L'utilisateur inséré si tout s'est bien passé
- * @return null
+ * @return false
  */
 {
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -52,7 +52,9 @@ SQL;
             userPseudo,
             userName,
             userBiography,
-            userPicture
+            userPicture,
+            userLocation,
+            userJoinedAt
         FROM User 
         WHERE userId = :id;
 SQL;
@@ -133,6 +135,8 @@ function login(PDO $db ,string $email, string $password): User | null
             userName,
             userBiography,
             userPicture,
+            userLocation,
+            userJoinedAt,
             userPassword
         FROM User
         WHERE userEmail = :email;
