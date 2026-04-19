@@ -80,7 +80,9 @@ CREATE TABLE IF NOT EXISTS `User` (
 
     PRIMARY KEY (`userId`),
     UNIQUE KEY (`userPseudo`),
-    UNIQUE KEY (`userEmail`)
+    UNIQUE KEY (`userEmail`),
+    FULLTEXT(`userPseudo`),
+    FULLTEXT(`userName`)
 );
 
 -- Table contenant les informations d'un événement
