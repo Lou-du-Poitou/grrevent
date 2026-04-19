@@ -11,4 +11,4 @@ ProjetWeb L1 - Informatique GROUPE INF09
 - `/style/*` : *Feuilles de style*
 - `/*` : *Pages accessibles*
 
-***/!\ Les fichiers sont docummentés, merci de lire cette documentation et de respecter les convention mises en place.***
+***/!\ Les fichiers sont docummentés, merci de lire cette documentation et de respecter les conventions mises en place.***
