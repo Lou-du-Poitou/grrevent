@@ -207,7 +207,7 @@ SQL;
 
             $state->execute();
 
-            $link = HostUrl::path("/motpasse.php?token=$token&id=$userId"); // Lien pour réinitialiser le mot de passe
+            $link = HostUrl::pathPasswordReset($token, $userId); // Lien pour réinitialiser le mot de passe
             $template = MailTemplate::requestResetPassword($userPseudo, $link);
 
             $mail = new Mail($email, true);
