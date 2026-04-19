@@ -4,6 +4,7 @@ require_once './config/constants.php';
 
 require_once './elements/inputs.php';
 require_once './elements/profiles.php';
+require_once './elements/cards.php';
 
 require_once './actions/user.actions.php';
 
@@ -44,10 +45,12 @@ if (isset($_GET['pseudo'])) {
             $metaKeywords = $user->getHTML('userLocation');
 
             // Initialisation du suivi de l'utilisateur connecté
-            $isFollow = isFollowUser($db, 
-                $logged->user()->getValue('userId'), 
-                $user->getValue('userId')
-            );
+            if ($logged->is()) {
+                $isFollow = isFollowUser($db, 
+                    $logged->user()->getValue('userId'), 
+                    $user->getValue('userId')
+                );
+            }
 
             // Modification des variables d'affichage
             $userId = $user->getHTML('userId');
@@ -64,6 +67,19 @@ if (isset($_GET['pseudo'])) {
             if (!empty($user->getValue('userPicture'))) {
                 $userPicture = $user->getHTML('userPicture');
             }
+        }
+
+        $offset = 0;
+        if (isset($_GET['offset'])) {
+            $offset = (int)$_GET['offset'];
+        }
+
+        if ($offset >= 0) {
+            $events = selectUserEvents($db,
+                $user->getValue('userId'),
+                DEFAULT_SELECT_LIMIT,
+                $offset
+            );
         }
 
         $db = null;
@@ -92,8 +108,8 @@ require './elements/header.php';
                     <?= $userName ?>
                 </h1>
 
-                <?php if ($logged->is()): ?>
-                <?= followUserHandler($user, $_SERVER['REQUEST_URI'], $isFollow) ?>
+                <?php if ($logged->is() && isset($_SERVER['REQUEST_URI'])): ?>
+                <?= followUserHandler($user, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isFollow) ?>
 
                 <?php endif ?>
             </div>
@@ -115,6 +131,12 @@ require './elements/header.php';
         </div>
 
     </div>
+
+    <!-- Événements de l'utilisateur -->
+    <?php if (isset($events) && isset($offset)): ?>
+    <?= cardsThread($events, HostUrl::pathToUser($user->getValue('userPseudo')), $offset) ?>
+
+    <?php endif ?>
 </div>
 
 <?php else: ?>
