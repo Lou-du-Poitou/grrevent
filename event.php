@@ -25,6 +25,9 @@ $eventPicture = DEFAULT_USER_PICTURE;
 $authorId = null;
 $authorPseudo = null;
 
+// Variable du status d'ajout d'un événement
+$isAdded = false;
+
 if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
     
@@ -41,6 +44,12 @@ if (isset($_GET['id'])) {
             $metaDescription = $event->getHTML('eventDescription');
             $metaImage = $event->getHTML('eventPicture');
             $metaKeywords = $event->getHTML('eventLocation');
+
+            // Initialisation du status d'ajout de l'événement
+            $isAdded = isAddedEvent($db, 
+                $logged->user()->getValue('userId'),
+                $event->getValue('eventId')
+            );
 
             // Modification des variables d'affichage
             $eventId = $event->getHTML('eventId');
@@ -88,13 +97,16 @@ require './elements/header.php';
                 </h1>
 
                 <?php if ($logged->is()): ?>
-                <form>
-                    <input type="hidden" name="add" value="<?= $eventId ?>">
-                    <?= buttonInput('Ajouter', 'submit', true, 'plus') ?>
-                </form>
+                <?= addEventHandler($event, $_SERVER['REQUEST_URI'], $isAdded) ?>
 
                 <?php endif ?>
             </div>
+
+            <?php if ($logged->is() && $logged->user()->getValue('userId') === $author->getValue('userId')): ?>
+            <div class="author-actions">
+                <?= deleteEventHandler($event, $_SERVER['REQUEST_URI']) ?>
+            </div>
+            <?php endif ?>
 
             <div class="profile-headers">
                 <?= profileHeader('Le', $eventDate) ?>

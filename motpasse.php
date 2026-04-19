@@ -34,7 +34,7 @@ if (isset($_GET['token']) && isset($_GET['id'])) {
     }
 }
 
-if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'motpasse.php')) {
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME'])) {
     if (isset($token) && isset($id)) {
         // On lance la procédure pour changer le mot de passe
 

@@ -37,6 +37,12 @@ p > a:hover, label > a:hover {
     text-decoration: underline;
 }
 
+button {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 .success, .warning, .error {
     font-weight: 600;
     -moz-user-select: none;

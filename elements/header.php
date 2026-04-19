@@ -86,14 +86,14 @@ require_once './elements/nav.php';
         <div class="left">
             <img alt="Logo"
                 class="icon"
-                src="path_to_icon"
+                src="https://res.cloudinary.com/dss2ops7q/image/upload/v1775053775/posts/2_1775053775052.webp"
             >
             <h1><?= SITE_NAME ?></h1>
         </div>
 
         <div class="center">
             <?php if ($logged->is()): ?>
-            <p><?= $logged->user()->getHTML('userPseudo') ?></p>
+            <p><?= icon('user-lock') . ' ' . $logged->user()->getHTML('userPseudo') ?></p>
             <?php endif ?>
         </div>
 
