@@ -46,10 +46,12 @@ if (isset($_GET['id'])) {
             $metaKeywords = $event->getHTML('eventLocation');
 
             // Initialisation du status d'ajout de l'événement
-            $isAdded = isAddedEvent($db, 
-                $logged->user()->getValue('userId'),
-                $event->getValue('eventId')
-            );
+            if ($logged->is()) {
+                $isAdded = isAddedEvent($db, 
+                    $logged->user()->getValue('userId'),
+                    $event->getValue('eventId')
+                );
+            }
 
             // Modification des variables d'affichage
             $eventId = $event->getHTML('eventId');
@@ -96,21 +98,24 @@ require './elements/header.php';
                     <?= $eventTitle ?>
                 </h1>
 
-                <?php if ($logged->is()): ?>
-                <?= addEventHandler($event, $_SERVER['REQUEST_URI'], $isAdded) ?>
+                <?php if ($logged->is() && isset($_SERVER['REQUEST_URI'])): ?>
+                <?= addEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isAdded) ?>
 
                 <?php endif ?>
             </div>
 
-            <?php if ($logged->is() && $logged->user()->getValue('userId') === $author->getValue('userId')): ?>
+            <?php if ($logged->is() && 
+                $logged->user()->getValue('userId') === $author->getValue('userId') &&
+                isset($_SERVER['REQUEST_URI'])
+            ): ?>
             <div class="author-actions">
-                <?= deleteEventHandler($event, $_SERVER['REQUEST_URI']) ?>
+                <?= deleteEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI']) ?>
             </div>
             <?php endif ?>
 
             <div class="profile-headers">
                 <?= profileHeader('Le', $eventDate) ?>
-                <?= profileHeader('Par', $authorPseudo, HostUrl::path("/user.php?pseudo=$authorPseudo")) ?>
+                <?= profileHeader('Par', $authorPseudo, HostUrl::pathToUser($authorPseudo)) ?>
                 <?php if (!empty($eventLocation)): ?>
                 <?= profileHeader('Localisation', $eventLocation) ?>
                 <?php endif ?>
