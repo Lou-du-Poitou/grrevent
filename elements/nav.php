@@ -1,4 +1,5 @@
 <?php
+require_once './class/Logged.php';
 
 function navItem(string $link, string $title, string $className=''): string
 /**
@@ -12,7 +13,7 @@ function navItem(string $link, string $title, string $className=''): string
  */
 {
     $className = '';
-    if ($_SERVER['SCRIPT_NAME'] === $link) {
+    if (str_contains($link, $_SERVER['SCRIPT_NAME'])) {
         $className .= 'active';
     }
 
@@ -25,11 +26,11 @@ HTML;
     return $html;
 }
 
-function navMenu(bool $connected=false): string
+function navMenu(Logged $logged): string
 /**
  * Menu de navigation
  * 
- * @var $connected=false
+ * @var Logged $logged
  * 
  * @return string (Composant html)
  */
@@ -40,13 +41,17 @@ function navMenu(bool $connected=false): string
         navItem('', 'Autre')*/
     );
 
-    if ($connected) {
+    if ($logged->is()) {
+        $user = $logged->user();
+
         $items .= (
+            navItem(HostUrl::pathToUser($user->getValue('userPseudo')), 'Mon profil') .
             navItem('/deconnexion.php', 'Déconnexion')
         );
     } else {
         $items .= (
-            navItem('/connexion.php', 'Se connecter')
+            navItem('/connexion.php', 'Se connecter') /*.
+            navItem('/inscription.php', "S'inscrire")*/
         );
     }
 
