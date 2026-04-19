@@ -44,7 +44,7 @@ class Logged
     /**
      * Permet de mettre l'utilisateur connecté
      * 
-     * @param User $user
+     * @var User $user
      * 
      * @return void
      */
