@@ -37,10 +37,14 @@ p > a:hover, label > a:hover {
     text-decoration: underline;
 }
 
-button {
+button, img {
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+img {
+    pointer-events: none;
 }
 
 .success, .warning, .error {
