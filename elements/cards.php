@@ -177,7 +177,7 @@ HTML;;
     if ($scroll) {
         // Précédent
         $previousOffset = $offset - DEFAULT_SELECT_LIMIT;
-        $previousLink = $referer . HostUrl::offsetQuery($previousOffset);
+        $previousLink = HostUrl::offsetQuery($referer, $previousOffset);
         $previousClass = '';
         if ($previousOffset < 0) {
             $previousClass .= 'disabled';
@@ -189,7 +189,7 @@ HTML;
 
         // Suivant
         $nextOffset = $offset + DEFAULT_SELECT_LIMIT;
-        $nextLink = $referer . HostUrl::offsetQuery($nextOffset);
+        $nextLink = HostUrl::offsetQuery($referer, $nextOffset);
         $nextClass = '';
         if (empty($entity)) {
             $nextClass .= 'disabled';
