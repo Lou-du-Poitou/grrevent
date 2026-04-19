@@ -236,7 +236,7 @@ SQL;
         $state->bindParam(':offset', $offset, PDO::PARAM_INT);
 
         $state->execute();
-        $data = $state->fetchAll();
+        $data = $state->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $event) {
             $events[] = new Event($event);
