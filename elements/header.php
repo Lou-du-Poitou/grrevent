@@ -70,7 +70,7 @@ require_once './elements/nav.php';
     <meta name="theme-color" content="#777777">
 
     <link rel="icon" 
-        href="https://res.cloudinary.com/dss2ops7q/image/upload/v1775053775/posts/2_1775053775052.webp"
+        href="<?= SITE_ICON ?>"
     >
 
     <link rel="stylesheet" 
@@ -86,7 +86,7 @@ require_once './elements/nav.php';
         <div class="left">
             <img alt="Logo"
                 class="icon"
-                src="https://res.cloudinary.com/dss2ops7q/image/upload/v1775053775/posts/2_1775053775052.webp"
+                src="<?= SITE_ICON ?>"
             >
             <h1><?= SITE_NAME ?></h1>
         </div>
@@ -110,8 +110,8 @@ require_once './elements/nav.php';
             <li>
                 <label class="header-item">
                     <input id="togglenav" type="checkbox" hidden>
-                    <i class="fas fa-bars"></i>
-                    <?= navMenu($logged->is()) ?>
+                    <?= icon('bars') ?>
+                    <?= navMenu($logged) ?>
                 </label>
             </li>
         </ul>
