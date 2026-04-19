@@ -10,9 +10,15 @@ define('TOKEN_REGEX', "/^[0-9a-f]{64}$/");
 define('DEFAULT_USER_PICTURE', '/public/default.webp');
 define('DEFAULT_EVENT_PICTURE', '/public/default.webp');
 
+// PARAMS
+define('DEFAULT_SELECT_LIMIT', 4);
+
 // ERRORS
 define('DB_ERROR_MESSAGE', 'Erreur base de données');
 
-// NAMES
+// SITE
 define('SITE_NAME', 'Nom Site');
+define('SITE_ICON', '/public/default.webp');
+
+// EMAIL
 define('FROM_EMAIL_NAME', 'Nom Site');
