@@ -120,13 +120,14 @@ HTML;
     return $html;
 }
 
-function cardsThread(array $entitys, string $referer, int $offset): string 
+function cardsThread(array $entitys, string $referer, int $offset, bool $scroll=true): string 
 /**
  * Renvoie un fil d'entités sur lequel on peut défiler
  * 
  * @var array $entitys
  * @var string $referer
  * @var int $offset
+ * @var bool $scroll=true
  * 
  * @return string (Composant HTML)
  */
@@ -169,31 +170,35 @@ HTML;;
     }
     
 
-    // Pour naviguer dans les 'cards'
+    // Pour naviguer dans les 'cards' seulement si $scroll=true
+    $previousHtml = '';
+    $nextHtml = '';
 
-    // Précédent
-    $previousOffset = $offset - DEFAULT_SELECT_LIMIT;
-    $previousLink = $referer . HostUrl::offsetQuery($previousOffset);
-    $previousClass = '';
-    if ($previousOffset < 0) {
-        $previousClass .= 'disabled';
-    }
+    if ($scroll) {
+        // Précédent
+        $previousOffset = $offset - DEFAULT_SELECT_LIMIT;
+        $previousLink = $referer . HostUrl::offsetQuery($previousOffset);
+        $previousClass = '';
+        if ($previousOffset < 0) {
+            $previousClass .= 'disabled';
+        }
 
-    $previousHtml = <<<HTML
-    <a href="$previousLink" class="$previousClass">Précédent</a>
+        $previousHtml = <<<HTML
+        <a href="$previousLink" class="$previousClass">Précédent</a>
 HTML;
 
-    // Suivant
-    $nextOffset = $offset + DEFAULT_SELECT_LIMIT;
-    $nextLink = $referer . HostUrl::offsetQuery($nextOffset);
-    $nextClass = '';
-    if (empty($entity)) {
-        $nextClass .= 'disabled';
-    }
+        // Suivant
+        $nextOffset = $offset + DEFAULT_SELECT_LIMIT;
+        $nextLink = $referer . HostUrl::offsetQuery($nextOffset);
+        $nextClass = '';
+        if (empty($entity)) {
+            $nextClass .= 'disabled';
+        }
 
-    $nextHtml = <<<HTML
-    <a href="$nextLink" class="$nextClass">Suivant</a>
+        $nextHtml = <<<HTML
+        <a href="$nextLink" class="$nextClass">Suivant</a>
 HTML;
+    }
 
     $html = <<<HTML
     <div class="cards-container">
