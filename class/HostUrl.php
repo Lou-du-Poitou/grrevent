@@ -115,21 +115,27 @@ class HostUrl
         return $url;
     }
 
-    public static function offsetQuery(?int $offset=null): string
+    public static function offsetQuery(string $referer, ?int $offset=null): string
     /**
      * Renvoie le paramètre GET offset
      * 
-     * @var int $offset
+     * @var string $referer
+     * @var ?int $offset=null
      * 
      * @return string PARAM GET URL
      */
     {
-        $offsetQuery = '';
-
+        $url = $referer;
+        $parseUrl = parse_url($referer);
+        
         if ($offset) {
-            $offsetQuery = '&offset=' . $offset;
+            if (isset($parseUrl['query'])) {
+                $url .= '&offset=' . $offset;
+            } else {
+                $url .= '?offset=' . $offset;
+            }
         }
 
-        return $offsetQuery;
+        return $url;
     }
 }
