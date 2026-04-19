@@ -55,7 +55,7 @@ HTML;
     return $html;
 }
 
-function followUserHandler(User $user, string $referer, bool $isFollow=false): string
+function followUserHandler(User $user, string $referer, string $requestUri, bool $isFollow=false): string
 /**
  * Renvoie le bouton permettant de suivre un utilisateur
  * 
@@ -67,21 +67,21 @@ function followUserHandler(User $user, string $referer, bool $isFollow=false): s
  */
 {
     $userId = (int)$user->getValue('userId');
-    $referer = htmlspecialchars($referer);
+    $requestUri = htmlspecialchars($requestUri);
 
     if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $referer)) {
         if (isset($_POST['follow']) && count($_POST) === 1) {
             $logged = new Logged();
             $loggedId = $logged->user()->getValue('userId');
-
+    
             $db = connection();
-
+    
             if (!$isFollow) {
                 followUser($db, $loggedId, $userId);
             } else {
                 unfollowUser($db, $loggedId, $userId);
             }
-
+    
             // On met à jour le status de suivi
             $isFollow = !$isFollow;
             
@@ -104,7 +104,7 @@ function followUserHandler(User $user, string $referer, bool $isFollow=false): s
     );
 
     $html = <<<HTML
-    <form action="$referer" method="post">
+    <form action="$requestUri" method="post">
         <input type="hidden" name="follow" value="$userId">
         $button
     </form>
@@ -113,7 +113,7 @@ HTML;
     return $html;
 }
 
-function addEventHandler(Event $event, string $referer, bool $isAdded=false): string
+function addEventHandler(Event $event, string $referer, string $requestUri, bool $isAdded=false): string
 /**
  * Renvoie le bouton permettant d'ajouter un événement
  * 
@@ -125,21 +125,21 @@ function addEventHandler(Event $event, string $referer, bool $isAdded=false): st
  */
 {
     $eventId = (int)$event->getValue('eventId');
-    $referer = htmlspecialchars($referer);
+    $requestUri = htmlspecialchars($requestUri);
 
-    if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $referer)) {
+    if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $referer)) {       
         if (isset($_POST['add']) && count($_POST) === 1) {
             $logged = new Logged();
             $loggedId = $logged->user()->getValue('userId');
-
+    
             $db = connection();
-
+    
             if (!$isAdded) {
                 addEvent($db, $loggedId, $eventId);
             } else {
                 removeEvent($db, $loggedId, $eventId);
             }
-
+    
             // On met à jour le status d'ajout
             $isAdded = !$isAdded;
             
@@ -162,7 +162,7 @@ function addEventHandler(Event $event, string $referer, bool $isAdded=false): st
     );
 
     $html = <<<HTML
-    <form action="$referer" method="post">
+    <form action="$requestUri" method="post">
         <input type="hidden" name="add" value="$eventId">
         $button
     </form>
@@ -171,7 +171,7 @@ HTML;
     return $html;
 }
 
-function deleteEventHandler(Event $event, string $referer)
+function deleteEventHandler(Event $event, string $referer, string $requestUri)
 /**
  * Permet de supprimer un événement
  * 
@@ -184,20 +184,20 @@ function deleteEventHandler(Event $event, string $referer)
 {
     $eventId = (int)$event->getValue('eventId');
     $authorId = (int)$event->getValue('author')->getValue('userId');
-    $referer = htmlspecialchars($referer);
+    $requestUri = htmlspecialchars($requestUri);
 
     if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $referer)) {
         if (isset($_POST['delete']) && count($_POST) === 1) {
             $logged = new Logged();
             $loggedId = (int)$logged->user()->getValue('userId');
-
+    
             if ($authorId === $loggedId) {
                 $db = connection();
                 
                 deleteEvent($db, $eventId);
-
+    
                 $db = null;
-
+    
                 header('Location: index.php');
             }
         }
@@ -213,7 +213,7 @@ function deleteEventHandler(Event $event, string $referer)
     );
 
     $html = <<<HTML
-    <form action="$referer" method="post">
+    <form action="$requestUri" method="post">
         <input type="hidden" name="delete" value="$eventId">
         $button
     </form>
