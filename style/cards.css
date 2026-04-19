@@ -10,7 +10,7 @@
 
 /* Carte event */
 .card {
-    width: 220px;
+    width: 235px;
     border: 2px solid var(--grey);
     border-radius: 25px;
     background-color: var(--header);
