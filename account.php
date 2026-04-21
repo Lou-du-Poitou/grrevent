@@ -7,7 +7,7 @@ $title = 'Paramètres';
 $succes = null;
 $erreur = null;
 
-// ÉTAPE 1 : charger les données actuelles de l'utilisateur
+// chargement des données actuelles de l'utilisateur
 $r = $db->prepare("SELECT * FROM User WHERE userId = ?");
 $r->execute([$_SESSION['userId']]);
 $user = $r->fetch(PDO::FETCH_ASSOC);
