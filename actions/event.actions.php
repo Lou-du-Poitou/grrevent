@@ -468,7 +468,7 @@ function selectSearchedEvent(
             LEAST(MATCH (eventDescription) AGAINST (
                 :query IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION
             ), 1000) AS relevance2,
-            LEAST(MATCH (userLocation) AGAINST (
+            LEAST(MATCH (eventLocation) AGAINST (
                 :query IN NATURAL LANGUAGE MODE
             ), 1000) AS relevance3,
             LEAST(MATCH (userPseudo) AGAINST (
