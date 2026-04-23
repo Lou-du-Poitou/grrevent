@@ -14,12 +14,10 @@ class HostUrl
         }
     }
 
-    private static function url(string ...$path)
+    private static function url(string ...$path): string | null
     /**
      * Renvoie l'url en fonction des paramètres en entrée
      * 
-     * @var string $protocol
-     * @var string $domain
      * @var string ...$path
      * 
      * @return string URL
@@ -71,13 +69,34 @@ class HostUrl
     /**
      * Génère l'URL vers le profil d'un événement
      * 
-     * @var string $id
+     * @var int $id
      * 
      * @return string URL
      */
     {
         $filePath = '/event.php';
         $query = '?id=' . $id;
+
+        $url = self::url(
+            $filePath,
+            $query
+        );
+
+        return $url;
+    }
+
+    public static function pathToSearch(string $q, string $type): string
+    /**
+     * Génère l'URL vers une recherche
+     * 
+     * @var string $q Contenu de la recherche
+     * @var string $type event|user
+     * 
+     * @return string URL
+     */
+    {
+        $filePath = '/recherche.php';
+        $query = '?q=' . $q . '&type=' . $type;
 
         $url = self::url(
             $filePath,
