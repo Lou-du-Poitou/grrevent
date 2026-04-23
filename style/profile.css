@@ -10,21 +10,21 @@
 
 /* Photo profil */
 .profile-pic {
-    object-fit: cover;
+    height: 210px;
     background-color: transparent;
 }
 
 .profile-data .image-container .user-pic {
     width: 210px;
-    height: 210px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .profile-data .image-container .event-pic {
-    height: 210px;
     min-width: 210px;
-    max-width: 250px;
+    max-width: 285px;
     border-radius: 25px;
+    object-fit: cover;
 }
 
 /* Header profil */
@@ -103,17 +103,6 @@
 .user-bio, .event-description {
     margin-top: 10px;
     max-width: 700px;
-}
-
-.profile-unknow {
-    display: block;
-    margin: 0 auto;
-    max-width: 700px;
-    padding: 20px;
-    text-align: center;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 /* adaptation */
