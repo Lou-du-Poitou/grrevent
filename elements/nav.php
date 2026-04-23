@@ -1,7 +1,11 @@
 <?php
 require_once './class/Logged.php';
 
-function navItem(string $link, string $title, string $className=''): string
+function navItem(
+    string $link, 
+    string $title, 
+    string $className=''
+): string
 /**
  * Item du menu de navigation
  * 
@@ -16,6 +20,8 @@ function navItem(string $link, string $title, string $className=''): string
     if (str_contains($link, $_SERVER['SCRIPT_NAME'])) {
         $className .= 'active';
     }
+
+    $link = htmlspecialchars($link);
 
     $html = <<<HTML
     <li class="$className">
@@ -36,22 +42,21 @@ function navMenu(Logged $logged): string
  */
 {
     $items = (
-        navItem('/', 'Accueil')/*.
-        navItem('', 'Autre').
-        navItem('', 'Autre')*/
+        navItem('/index.php', 'Accueil') .
+        navItem('/recherche.php', 'Recherches')
     );
 
     if ($logged->is()) {
         $user = $logged->user();
 
         $items .= (
-            navItem(HostUrl::pathToUser($user->getValue('userPseudo')), 'Mon profil') .
-            navItem('/deconnexion.php', 'Déconnexion')
+            navItem('/suivis.php', 'Suivis') .
+            navItem('/nouveau.php', 'Nouveau') .
+            navItem('/compte.php', 'Compte')
         );
     } else {
         $items .= (
-            navItem('/connexion.php', 'Se connecter') /*.
-            navItem('/inscription.php', "S'inscrire")*/
+            navItem('/connexion.php', 'Se connecter')
         );
     }
 
