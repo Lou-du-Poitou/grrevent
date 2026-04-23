@@ -12,6 +12,7 @@
     --black: #252525;
     --grey: #dbdbdb;
     --dark: #000000;
+    --clear: #ffffff;
     --link: #0000ff;
     --green: #0e990e;
     --red: #990e0e;
@@ -28,7 +29,7 @@ body {
     font-size: 0.95rem;
 }
 
-p > a, label > a {
+p > a, label > a, li > a {
     color: var(--link);
     text-decoration: none;
 }
