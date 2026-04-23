@@ -8,7 +8,12 @@ require_once './class/HostUrl.php';
 
 require_once './elements/error.exit.php';
 
-function register(PDO $db, string $pseudo, string $email, string $password): User | false
+function register(
+    PDO $db, 
+    string $pseudo, 
+    string $email, 
+    string $password
+): User | false
 /**
  * Permet d'inscrire un nouvel utilisateur dans la base de données
  * 
@@ -73,7 +78,11 @@ SQL;
     return $user;
 }
 
-function duplicateEmailPseudo(PDO $db, string $pseudo, string $email): bool
+function duplicateEmailPseudo(
+    PDO $db, 
+    string $pseudo, 
+    string $email
+): bool
 /**
  * Vérifie si le pseudo ou l'email est déjà utilisé
  * 
@@ -114,7 +123,11 @@ SQL;
     return $duplicate;
 }
 
-function login(PDO $db ,string $email, string $password): User | null
+function login(
+    PDO $db, 
+    string $email, 
+    string $password
+): User | null
 /**
  * Renvoie l'utilisateur qui essaye de se connecter
  * 
@@ -157,7 +170,10 @@ SQL;
     return $user;
 }
 
-function requestResetPassword(PDO $db, string $email): bool
+function requestResetPassword(
+    PDO $db, 
+    string $email
+): bool
 /**
  * Permet de faire suivre la demande de réinitialisation de mot de passe
  * 
@@ -224,7 +240,12 @@ SQL;
     return true;
 }
 
-function resetPassword(PDO $db, int $id, string $token, string $password): bool
+function resetPassword(
+    PDO $db, 
+    int $id, 
+    string $token, 
+    string $password
+): bool
 /**
  * Permet de faire suivre la demande de réinitialisation de mot de passe
  * 
