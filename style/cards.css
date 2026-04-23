@@ -5,7 +5,6 @@
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
-    max-height: 350px;
 }
 
 /* Carte event */
@@ -16,6 +15,11 @@
     background-color: var(--header);
     text-align: center;
     padding: 20px;
+    transition-duration: 0.4s;
+}
+
+.card:hover {
+    box-shadow: 0 0 8px 1px var(--grey);
 }
 
 /* titre */
@@ -39,23 +43,28 @@
 /* image */
 .card img {
     height: 120px;
-    object-fit: cover;
     margin: 10px 0;
 }
 
 .card .event-pic {
     width: 100%;
     border-radius: 25px;
+    object-fit: fill;
 }
 
 .card .user-pic {
     width: 120px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
-.card .card-infos * {
+.card .card-infos > p {
+    background-color: var(--white);
+    border: solid 2px var(--grey);
+    padding: 8px;
+    border-radius: 25px;
     overflow: hidden;
-    max-height: 120px;
+    height: 120px;
 }
 
 .cards-scroll {
