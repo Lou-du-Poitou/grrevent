@@ -3,5 +3,5 @@ session_start();
 session_unset();
 session_destroy();
 
-header('Location: _debug.php');
+header('Location: connexion.php');
 exit();
