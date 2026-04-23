@@ -62,6 +62,7 @@ HTML;
     {
         $title = 'Réinitialiser mot de passe';
         $pseudo = htmlspecialchars($pseudo);
+        $link = htmlspecialchars($link);
 
         $html = <<<HTML
         <h1>Hey $pseudo</h1>
