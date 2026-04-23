@@ -5,6 +5,13 @@ require_once './class/HostUrl.php';
 
 require_once './elements/icon.php';
 
+/**
+ * Les deux cartes Utilisateur/Événement sont très proches
+ * d'un point de vue de la structure HTML, cette duplication
+ * de code est voulu car ces structures peuvent évoluer avec
+ * le développement de l'application.
+ */
+
 function eventCard(Event $event): string
 /**
  * Renvoie les informations d'un événement sous forme de carte
@@ -24,17 +31,46 @@ function eventCard(Event $event): string
     }
     $eventDate = date_format(
         date_create($event->getValue('eventDate')),
-        'd/m/Y'
+        'd/m/Y H\hi'
     );
     $eventLocation = $event->getHTML('eventLocation');
     $eventPlaces = $event->getHTML('eventPlaces');
+    $authorPseudo = $event->getValue('author')->getHTML('userPseudo');
 
-    $eventUrl = HostUrl::pathToEvent($event->getValue('eventId'));
+    $eventUrl = htmlspecialchars(
+        HostUrl::pathToEvent($event->getValue('eventId'))
+    );
 
-    // Les icones
+    $authorUrl = htmlspecialchars(
+        HostUrl::pathToUser($event->getValue('author')->getValue('userPseudo'))
+    );
+
+    // Génération des infos en dynamique
+    $authorIcon = icon('feather-pointed');
+    $authorHTML = <<<HTML
+    <li>$authorIcon <a href="$authorUrl">$authorPseudo</a></li>
+HTML;
+
     $dateIcon = icon('calendar');
-    $locationIcon = icon('location-dot');
-    $placesIcon = icon('users');
+    $dateHTML = <<<HTML
+    <li>$dateIcon $eventDate</li>
+HTML;
+
+    $locationHTML = null;
+    if (!empty($eventLocation)) {
+        $locationIcon = icon('location-dot');
+        $locationHTML = <<<HTML
+        <li>$locationIcon $eventLocation</li>
+HTML;
+    }
+
+    $placesHTML = null;
+    if (!empty($eventPlaces)) {
+        $placesIcon = icon('users');
+        $placesHTML = <<<HTML
+        <li>$placesIcon $eventPlaces</li>
+HTML;
+    }
 
     $html = <<<HTML
     <div class="card">
@@ -51,9 +87,10 @@ function eventCard(Event $event): string
             <p>$eventDescription</p>
 
             <ul>
-                <li>$dateIcon $eventDate</li>
-                <li>$locationIcon $eventLocation</li>
-                <li>$placesIcon $eventPlaces</li>
+                $authorHTML
+                $dateHTML
+                $locationHTML
+                $placesHTML
             </ul>
         </div>
     </div>
@@ -82,17 +119,25 @@ function userCard(User $user): string
         $userPicture = $user->getHTML('userPicture');
     }
     $userLocation = $user->getHTML('userLocation');
-    $userJoinedAt = date_format(
-        date_create($user->getValue('userJoinedAt')),
-        'd/m/Y'
+
+    $userUrl = htmlspecialchars(
+        HostUrl::pathToUser($user->getValue('userPseudo'))
     );
 
-    $userUrl = HostUrl::pathToUser($user->getValue('userPseudo'));
+    // Génération des infos en dynamique
 
-    // Les icones
     $pseudoIcon = icon('user-tie');
-    $locationIcon = icon('location-dot');
-    $joinedIcon = icon('calendar-plus');
+    $pseudoHTML = <<<HTML
+    <li>$pseudoIcon $userPseudo</li>
+HTML;
+
+    $locationHTML = null;
+    if (!empty($userLocation)) {
+        $locationIcon = icon('location-dot');
+        $locationHTML = <<<HTML
+        <li>$locationIcon $userLocation</li>
+HTML;
+    }
 
     $html = <<<HTML
     <div class="card">
@@ -109,9 +154,8 @@ function userCard(User $user): string
             <p>$userBio</p>
 
             <ul>
-                <li>$pseudoIcon $userPseudo</li>
-                <li>$locationIcon $userLocation</li>
-                <li>$joinedIcon $userJoinedAt</li>
+                $pseudoHTML
+                $locationHTML
             </ul>
         </div>
     </div>
@@ -166,7 +210,7 @@ HTML;
             <h1>Pas de contenu</h1>
             <p>Cette requête ne renvoie aucun contenu</p>
         </div>
-HTML;;
+HTML;
     }
     
 
@@ -177,7 +221,9 @@ HTML;;
     if ($scroll) {
         // Précédent
         $previousOffset = $offset - DEFAULT_SELECT_LIMIT;
-        $previousLink = HostUrl::offsetQuery($referer, $previousOffset);
+        $previousLink = htmlspecialchars(
+            HostUrl::offsetQuery($referer, $previousOffset)
+        );
         $previousClass = '';
         if ($previousOffset < 0) {
             $previousClass .= 'disabled';
@@ -189,7 +235,9 @@ HTML;
 
         // Suivant
         $nextOffset = $offset + DEFAULT_SELECT_LIMIT;
-        $nextLink = HostUrl::offsetQuery($referer, $nextOffset);
+        $nextLink = htmlspecialchars(
+            HostUrl::offsetQuery($referer, $nextOffset)
+        );
         $nextClass = '';
         if (empty($entity)) {
             $nextClass .= 'disabled';
