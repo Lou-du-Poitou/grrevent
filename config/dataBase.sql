@@ -69,11 +69,6 @@ CREATE TABLE IF NOT EXISTS `User` (
         -- URL: ^http(s)?:\/\/[-.a-z0-9]+\.[a-z]{2,}\/[-.\/a-zA-Z0-9_]+[a-z]{2,}$
         -- PATH: ^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$
         CHECK (`userPicture` REGEXP "^\/[-_\/a-zA-Z0-9]+\.[a-z]{2,}$"),
-    /*
-    `userBirthday` DATETIME NOT NULL,
-    `userVisibility` BIT(2) NOT NULL
-        DEFAULT 0,
-    */
     `userLocation` VARCHAR(50),
     `userJoinedAt` DATETIME NOT NULL 
         DEFAULT CURRENT_TIMESTAMP,
@@ -82,7 +77,9 @@ CREATE TABLE IF NOT EXISTS `User` (
     UNIQUE KEY (`userPseudo`),
     UNIQUE KEY (`userEmail`),
     FULLTEXT(`userPseudo`),
-    FULLTEXT(`userName`)
+    FULLTEXT(`userName`),
+    FULLTEXT(`userBiography`),
+    FULLTEXT(`userLocation`)
 );
 
 -- Table contenant les informations d'un événement
@@ -92,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `Event` (
     `eventDescription` VARCHAR(500) NOT NULL,
     `eventDate` DATETIME NOT NULL,
     `eventLocation` VARCHAR(50),
-    `eventPlaces` INT UNSIGNED -- On peut passer à BIGINT (à voire)
+    `eventPlaces` BIGINT UNSIGNED
         DEFAULT NULL,
     `eventPicture` VARCHAR(250)
         -- REGEX url ou chemin d'accès à voire
@@ -111,13 +108,13 @@ CREATE TABLE IF NOT EXISTS `Event` (
     FULLTEXT(`eventLocation`)
 );
 
--- Table contenant les informations d'une catégorie
-CREATE TABLE IF NOT EXISTS `Category` (
-    `categoryId` BIGINT UNSIGNED NOT NULL,
-    `categoryName` VARCHAR(50) NOT NULL,
+-- Création d'un index pour optimiser les requêtes ORDER BY
+CREATE INDEX IF NOT EXISTS `eventDate` ON `Event`(`eventDate`);
 
-    PRIMARY KEY (`categoryId`)
-);
+/**
+* En cas de trop nombreux enregistrement on pourra partitionner
+* la table, je ne m'y connais pas encore bien à ce sujet.
+*/
 
 -- Table contenant les événements ajoutés par un utilisateur
 CREATE TABLE IF NOT EXISTS `UserAddEvent` (
@@ -130,19 +127,6 @@ CREATE TABLE IF NOT EXISTS `UserAddEvent` (
         ON DELETE CASCADE,
 
     PRIMARY KEY (`userId`, `eventId`)
-);
-
--- Table contenant les catégories associées à un événement
-CREATE TABLE IF NOT EXISTS `EventHasCategory` (
-    `eventId` BIGINT UNSIGNED NOT NULL,
-    `categoryId` BIGINT UNSIGNED NOT NULL,
-
-    FOREIGN KEY (`eventId`) REFERENCES `Event`(`eventid`)
-        ON DELETE CASCADE,
-    FOREIGN KEY (`categoryId`) REFERENCES `Category`(`categoryId`)
-        ON DELETE CASCADE,
-
-    PRIMARY KEY (`eventId`, `categoryId`)
 );
 
 -- Table contenant les suivis d'un utilisateur
@@ -172,66 +156,6 @@ CREATE TABLE IF NOT EXISTS `Token` (
     PRIMARY KEY (`userId`)
 );
 
--- II: Partie support de l'application
--- -------------------------------- --
--- /!\ PAS LE TEMPS /!\ --
-/*
--- Table contenant les utilisateurs support
-CREATE TABLE IF NOT EXISTS `Support` (
-    `supportId` BIGINT UNSIGNED NOT NULL,
-    `supportJoinedAt` DATETIME NOT NULL
-        DEFAULT CURRENT_TIMESTAMP,
-    `supportLevel` TINYINT NOT NULL -- On verra
-        DEFAULT 0,
-
-    FOREIGN KEY (`supportId`) REFERENCES `User`(`userId`)
-        ON DELETE CASCADE,
-
-    PRIMARY KEY (`supportId`)
-);
-
--- Table contanent les requètes envoyées par un utiilisateur
-CREATE TABLE IF NOT EXISTS `Request` (
-    `requestId` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `requestDate` DATETIME NOT NULL
-        DEFAULT CURRENT_TIMESTAMP,
-    `requestStatus` BIT(2) NOT NULL
-        DEFAULT 0,
-    `requestSubject` VARCHAR(120) NOT NULL,
-
-    `userId` BIGINT UNSIGNED NOT NULL,
-    `supportId` BIGINT UNSIGNED
-        DEFAULT NULL,
-
-    FOREIGN KEY (`userId`) REFERENCES `User`(`userId`)
-        ON DELETE CASCADE,
-    FOREIGN KEY (`supportId`) REFERENCES `Support`(`supportId`)
-        ON DELETE SET NULL,
-
-    PRIMARY KEY (`requestId`)
-);
-
--- Table contenant les messages d'une requète
-CREATE TABLE IF NOT EXISTS `Message` (
-    `messageId` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `messageContent` VARCHAR(500) NOT NULL,
-
-    `userId` BIGINT UNSIGNED NOT NULL,
-    `requestId` BIGINT UNSIGNED NOT NULL,
-    -- Message auquel il répond
-    `parentId` BIGINT UNSIGNED
-        DEFAULT NULL,
-
-    FOREIGN KEY (`userId`) REFERENCES `User`(`userId`)
-        ON DELETE CASCADE,
-    FOREIGN KEY (`requestId`) REFERENCES `Request`(`requestId`)
-        ON DELETE CASCADE,
-    FOREIGN KEY (`parentId`) REFERENCES `Message`(`messageId`)
-        ON DELETE CASCADE,
-
-    PRIMARY KEY (`messageId`)
-);
-*/
 /**
 * /!\ Lire la convention en haut de page avant
 * de commencer à modifier le fichier
