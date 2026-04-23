@@ -40,7 +40,7 @@ class Logged
         return !empty($this->user);
     }
 
-    public static function setUser(User $user): void
+    public function setUser(User $user): void
     /**
      * Permet de mettre l'utilisateur connecté
      * 
@@ -54,5 +54,6 @@ class Logged
         }
 
         $_SESSION['user'] = $user;
+        $this->user = $user;
     }
 }
