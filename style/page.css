@@ -1,4 +1,4 @@
-/* Container de la page */
+/* Container d'une page */
 
 .container {
     max-width: 1100px;
@@ -24,4 +24,35 @@
     border: 1px solid var(--black);
     background: transparent;
     cursor: pointer;
+}
+
+.part-title {
+    margin-bottom: 25px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.alert-warn {
+    display: block;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 20px;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+hr {
+    border: solid 1px var(--grey);
+    margin: 20px auto;
+    max-width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+    .part-title {
+        font-size: 1.3rem;
+        text-align: center;
+    }
 }
