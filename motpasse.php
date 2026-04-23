@@ -8,9 +8,13 @@ require_once './actions/auth.actions.php';
 
 require_once './class/FormMessage.php';
 
+require_once './class/Logged.php';
+
+$logged = new Logged();
+
 // Paramètres passés au header
-$title = 'Mot de passe oublié';
-$metaDescription = "Page à utiliser en cas d'oublie de votre mot de passe";
+$titlePage = 'Mot de passe';
+$metaDescription = "Page pour changer votre mot de passe";
 
 // false si on réinitialise le mot de passe (Affichage du formulaire)
 $request = true;
@@ -108,7 +112,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER
 require './elements/header.php'; 
 ?>
 <div class="auth-form">
-    <h1><?= $title ?></h1>
+    <h1><?= htmlspecialchars($titlePage) ?></h1>
 
     <form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="post">
         <?php if ($request): ?>
@@ -124,15 +128,21 @@ require './elements/header.php';
 
         <?php if ($erreur): ?>
         <!-- Erreur lors de la demande -->
-        <p class="error"><?= $erreur ?></p>
+        <p class="error"><?= htmlspecialchars($erreur) ?></p>
         <?php endif ?>
 
         <?php if ($success): ?>
         <!-- Succès de la demande -->
-        <p class="success"><?= $success ?></p>
+        <p class="success"><?= htmlspecialchars($success) ?></p>
         <?php endif ?>
     </form>       
     
+    <?php if ($logged->is()): ?>
+    <p class="footer">Paramètres du compte ? <a href="compte.php">Ici</a></p>
+
+    <?php else: ?>
     <p class="footer">Vous avez retrouvé la mémoire ? <a href="connexion.php">Se connecter</a></p>
+
+    <?php endif ?>
 </div>
 <?php require './elements/footer.php' ?>
