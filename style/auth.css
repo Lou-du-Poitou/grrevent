@@ -23,6 +23,8 @@
     padding: 8px;
     border: solid 1px var(--black);
     border-radius: 5px;
+    background-color: var(--clear);
+    font-size: 0.85rem;
 }
 
 .auth-form input:focus {
@@ -52,6 +54,7 @@
     letter-spacing: 1px;
     font-weight: 500;
     font-size: 0.9rem;
+    min-width: 138px;
 }
 
 .auth-form button[type='submit']:disabled {
