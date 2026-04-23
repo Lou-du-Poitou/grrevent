@@ -1,3 +1,7 @@
+<!-- 
+/!\ Fichier à enlever de préférence pour le  
+déploiement de l'application en production.
+-->
 <?php
     require_once './class/User.php';
     require_once './class/Logged.php';
