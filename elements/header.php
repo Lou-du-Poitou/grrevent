@@ -1,3 +1,6 @@
+<!--
+ProjetWeb - L1 INF09 (c) 2026
+-->
 <!-- Début des pages du site 
 L'importer au début à chaques page:
 require './elements/header.php';
@@ -21,6 +24,7 @@ function headerItem(string $link, string $iconName): string
  * @return string (Composant html)
  */
 {
+    $link = htmlspecialchars($link);
     $icon = icon($iconName);
 
     $html = <<<HTML
@@ -34,7 +38,7 @@ HTML;
     return $html;
 }
 
-if (!isset($title)) $title = SITE_NAME;
+if (!isset($titlePage)) $titlePage = SITE_NAME;
 
 $logged = new Logged();
 
@@ -47,30 +51,34 @@ require_once './elements/nav.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= $title ?></title>
+    <title><?= htmlspecialchars($titlePage) ?></title>
 
     <!-- Balises meta -->
     <?php if (isset($metaDescription)): ?>
-    <meta name="description" content="<?= $metaDescription ?>">
-    <meta property="og:description" content="<?= $metaDescription ?>">
+    <meta name="description" content="<?= htmlspecialchars($metaDescription) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($metaDescription) ?>">
     <?php endif; ?>
 
     <?php if (isset($metaImage)): ?>
-    <meta property="og:image" content="<?= $metaImage ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($metaImage) ?>">
     <?php endif ?>
 
     <?php if (isset($metaKeywords)): ?>
-    <meta property="og:keywords" content="<?= $metaKeywords ?>">
+    <meta property="og:keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
+    <?php endif; ?>
+
+    <?php if (isset($metaAuthor)): ?>
+    <meta property="og:author" content="<?= htmlspecialchars($metaAuthor) ?>">
     <?php endif; ?>
     
-    <meta property="og:title" content="<?= $title ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($titlePage) ?>">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content=<?= str_replace(' ', '', SITE_NAME) ?>>
+    <meta property="og:site_name" content=<?= htmlspecialchars(str_replace(' ', '', SITE_NAME)) ?>>
     <meta property="og:url" content="<?= htmlspecialchars(HostUrl::path($_SERVER['REQUEST_URI'])) ?>">
     <meta name="theme-color" content="#777777">
 
     <link rel="icon" 
-        href="<?= SITE_ICON ?>"
+        href="<?= htmlspecialchars(SITE_ICON) ?>"
     >
 
     <link rel="stylesheet" 
@@ -86,9 +94,9 @@ require_once './elements/nav.php';
         <div class="left">
             <img alt="Logo"
                 class="icon"
-                src="<?= SITE_ICON ?>"
+                src="<?= htmlspecialchars(SITE_ICON) ?>"
             >
-            <h1><?= SITE_NAME ?></h1>
+            <h1><?= htmlspecialchars(SITE_NAME) ?></h1>
         </div>
 
         <div class="center">
@@ -99,7 +107,7 @@ require_once './elements/nav.php';
 
         <ul class="options">
             <?php if ($logged->is()): ?>
-            <?= headerItem('account.php', 'user') ?>
+            <?= headerItem(HostUrl::pathToUser($logged->user()->getValue('userPseudo')), 'user') ?>
             <?= headerItem('deconnexion.php', 'right-from-bracket') ?>
 
             <?php else: ?>
