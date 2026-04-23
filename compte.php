@@ -60,7 +60,7 @@ if (
         }
 
         // Taitement de l'image
-        if (isset($_FILES['picture']) && !empty($_FILES['picture']['tmp_name'])) {
+        if (isset($_FILES['picture']) && $_FILES['picture']['error'] !== UPLOAD_ERR_NO_FILE) {
             $file = $_FILES['picture'];
             
             $upload = new UploadFile($file);
