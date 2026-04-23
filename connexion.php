@@ -10,7 +10,7 @@ require_once './class/FormMessage.php';
 require_once './class/Logged.php';
 
 // Paramètres passés au header
-$title = 'Connexion';
+$titlePage = 'Connexion';
 $metaDescription = "Page de connexion de l'application";
 
 $erreur = null;
@@ -37,9 +37,10 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER
 
             $user = login($db, $email, $password);
             if ($user) {
-                Logged::setUser($user);
+                $logged = new Logged();
+                $logged->setUser($user);
 
-                header('Location: _debug.php');
+                header('Location: index.php');
             } else {
                 $erreur = FormMessage::getError('Login');
             }
@@ -54,9 +55,9 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER
 require './elements/header.php'; 
 ?>
 <div class="auth-form">
-    <h1><?= $title ?></h1>
+    <h1><?= htmlspecialchars($titlePage) ?></h1>
 
-    <form action="connexion.php" method="post">
+    <form action="" method="post">
         <?= emailInput('email', 'E-mail', $email) ?>
         <?= passwordInput('password', 'Mot de passe') ?>
 
@@ -66,7 +67,7 @@ require './elements/header.php';
 
         <?php if ($erreur): ?>
         <!-- Erreur lors de la connexion -->
-        <p class="error"><?= $erreur ?></p>
+        <p class="error"><?= htmlspecialchars($erreur) ?></p>
         <?php endif ?>
     </form>       
     
