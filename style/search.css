@@ -1,0 +1,60 @@
+.search-part {
+    display: grid;
+    margin: 0 auto;
+    max-width: 500px;
+    grid-template-areas: 
+        "e1 e2"
+        "e3 e3";
+    grid-template-columns: auto 90px;
+    margin-bottom: 50px;
+}
+
+.search-part input[type="search"] {
+    outline: none;
+    padding: 15px;
+    background-color: var(--clear);
+    border: solid 2px var(--grey);
+    border-radius: 25px 0 0 25px;
+    grid-area: e1;
+}
+
+.search-part select {
+    cursor: pointer;
+    padding: 8px 15px;
+    background-color: var(--header);
+    border: solid 2px var(--grey);
+    border-radius: 18px;
+    grid-area: e3;
+    transition-duration: 0.4s;
+    margin-top: 10px;
+    font-weight: 600;
+    font-style: italic;
+    outline: none;
+}
+
+.search-part button[type="submit"] {
+    grid-area: e2;
+    border: solid 2px var(--grey);
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: var(--header);
+    transition-duration: 0.4s;
+}
+
+.search-part button[type="submit"]:hover, .search-part select:hover {
+    background-color: var(--grey);
+}
+
+.search-part input[type="search"]:focus, 
+.search-part input[type="search"]:focus ~ button[type="submit"],
+.search-part select:focus {
+    box-shadow: 0 0 8px 1px var(--grey);
+}
+
+@media screen and (max-width: 600px) {
+    .search-part {
+        grid-template-columns: auto 50px;
+    }
+}
