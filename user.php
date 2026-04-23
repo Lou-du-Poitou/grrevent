@@ -39,10 +39,13 @@ if (isset($_GET['pseudo'])) {
 
         if ($user) {
             // Paramètres passé au header
-            $title = 'Profil de ' . $user->getHTML('userPseudo');
-            $metaDescription = $user->getHTML('userBiography');
-            $metaImage = $user->getHTML('userPicture');
-            $metaKeywords = $user->getHTML('userLocation');
+            $titlePage = 'Profil de ' . $user->getValue('userPseudo');
+            $metaDescription = $user->getValue('userBiography');
+            if ($user->getValue('userPicture')) {
+                $metaImage = HostUrl::path($user->getValue('userPicture'));
+            }
+            $metaKeywords = $user->getValue('userLocation');
+            $metaAuthor = $user->getValue('userPseudo');
 
             // Initialisation du suivi de l'utilisateur connecté
             if ($logged->is()) {
@@ -140,7 +143,7 @@ require './elements/header.php';
 </div>
 
 <?php else: ?>
-<div class="profile-unknow">
+<div class="alert-warn">
     <h1>Utilisateur inconnu</h1>
     <p>Vérifiez l'URL ou l'existence de ce compte</p>
 </div>
