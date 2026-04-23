@@ -21,7 +21,7 @@ $eventDescription = null;
 $eventDate = null;
 $eventLocation = null;
 $eventPlaces = null;
-$eventPicture = DEFAULT_USER_PICTURE;
+$eventPicture = DEFAULT_EVENT_PICTURE;
 $authorId = null;
 $authorPseudo = null;
 
@@ -40,10 +40,12 @@ if (isset($_GET['id'])) {
 
         if ($event) {
             // Paramètres passé au header
-            $title = 'Événement ' . $event->getHTML('eventTitle');
-            $metaDescription = $event->getHTML('eventDescription');
-            $metaImage = $event->getHTML('eventPicture');
-            $metaKeywords = $event->getHTML('eventLocation');
+            $titlePage = $event->getValue('eventTitle');
+            $metaDescription = $event->getValue('eventDescription');
+            if ($event->getValue('eventPicture')) {
+                $metaImage = HostUrl::path($event->getValue('eventPicture'));
+            }
+            $metaKeywords = $event->getValue('eventLocation');
 
             // Initialisation du status d'ajout de l'événement
             if ($logged->is()) {
@@ -59,17 +61,20 @@ if (isset($_GET['id'])) {
             $eventDescription = nl2br($event->getHTML('eventDescription'));
             $eventDate = date_format(
                 date_create($event->getValue('eventDate')),
-                'd/m/Y à H:i'
+                'd/m/Y à H\hi'
             );
             $eventLocation = $event->getHTML('eventLocation');
             $eventPlaces = $event->getHTML('eventPlaces');
             if (!empty($event->getValue('eventPicture'))) {
-                $userPicture = $event->getHTML('eventPicture');
+                $eventPicture = $event->getHTML('eventPicture');
             }
 
             $author = $event->getValue('author');
             $authorId = $author->getHTML('userId');
             $authorPseudo = $author->getHTML('userPseudo');
+
+            // Paramètre passé au header
+            $metaAuthor = $author->getValue('userPseudo');
         }
 
         $db = null;
@@ -134,7 +139,7 @@ require './elements/header.php';
 </div>
 
 <?php else: ?>
-<div class="profile-unknow">
+<div class="alert-warn">
     <h1>Événement inconnu</h1>
     <p>Vérifiez l'URL ou l'existence de cet événement</p>
 </div>
