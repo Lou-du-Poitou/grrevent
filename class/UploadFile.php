@@ -18,7 +18,9 @@ class UploadFile
      */
     {
         $info = finfo_open(FILEINFO_MIME_TYPE);
-        if (!$info) return false;
+        if (!$info || !$this->fileTmp) {
+            return false;
+        }
 
         $mimeType = finfo_file($info, $this->fileTmp);
         finfo_close($info);
