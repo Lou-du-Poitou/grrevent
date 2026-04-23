@@ -15,7 +15,9 @@ function backButton(): string
  * @return string (Composant HTML)
  */
 {
-    $back = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+    $back = htmlspecialchars(
+        $_SERVER['HTTP_REFERER'] ?? 'index.php'
+    );
 
     $html = <<<HTML
     <div class="back-btn">
@@ -28,7 +30,11 @@ HTML;
     return $html;
 }
 
-function profileHeader(string $keyword, string $value, ?string $link=null): string
+function profileHeader(
+    string $keyword, 
+    string $value, 
+    ?string $link=null
+): string
 /**
  * Renvoie un élément header d'un profil
  * 
@@ -41,6 +47,7 @@ function profileHeader(string $keyword, string $value, ?string $link=null): stri
 {
     $set = htmlspecialchars($value);
     if ($link) {
+        $link = htmlspecialchars($link);
         $set = <<<HTML
         <a href="$link">$set</a>
 HTML;
@@ -55,9 +62,14 @@ HTML;
     return $html;
 }
 
-function followUserHandler(User $user, string $referer, string $requestUri, bool $isFollow=false): string
+function followUserHandler(
+    User $user, 
+    string $referer, 
+    string $requestUri, 
+    bool $isFollow=false
+): string
 /**
- * Renvoie le bouton permettant de suivre un utilisateur
+ * Renvoie le bouton permettant de suivre/ne plus suivre un utilisateur
  * 
  * @var User $user
  * @var string $referer
@@ -113,9 +125,14 @@ HTML;
     return $html;
 }
 
-function addEventHandler(Event $event, string $referer, string $requestUri, bool $isAdded=false): string
+function addEventHandler(
+    Event $event, 
+    string $referer, 
+    string $requestUri, 
+    bool $isAdded=false
+): string
 /**
- * Renvoie le bouton permettant d'ajouter un événement
+ * Renvoie le bouton permettant d'ajouter/retirer un événement
  * 
  * @var Event $event
  * @var string $referer
@@ -171,7 +188,11 @@ HTML;
     return $html;
 }
 
-function deleteEventHandler(Event $event, string $referer, string $requestUri)
+function deleteEventHandler(
+    Event $event, 
+    string $referer, 
+    string $requestUri
+): string
 /**
  * Permet de supprimer un événement
  * 
