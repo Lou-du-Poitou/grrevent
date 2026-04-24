@@ -9,7 +9,7 @@ require_once './elements/error.exit.php';
 function selectEvent(
     PDO $db, 
     int $id
-): Event | false
+): Event | bool
 /**
  * Permet de sélectionner un événement grâce à son identifiant
  * 
@@ -109,7 +109,7 @@ function addEvent(
     PDO $db, 
     int $loggedId, 
     int $eventId
-): true
+): bool
 /**
  * Permet à un utilisateur d'ajouter un événement
  * 
@@ -148,7 +148,7 @@ function removeEvent(
     PDO $db, 
     int $loggedId, 
     int $eventId
-): true
+): bool
 /**
  * Permet à un utilisateur de retirer un événement
  * 
@@ -182,7 +182,7 @@ SQL;
 function deleteEvent(
     PDO $db, 
     int $eventId
-): true
+): bool
 /**
  * Permet de supprimer un événement
  * 
