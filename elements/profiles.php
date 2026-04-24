@@ -46,6 +46,7 @@ function profileHeader(
  */
 {
     $set = htmlspecialchars($value);
+    $keyword = htmlspecialchars($keyword);
     if ($link) {
         $link = htmlspecialchars($link);
         $set = <<<HTML
