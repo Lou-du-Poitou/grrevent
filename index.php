@@ -63,7 +63,7 @@ require './elements/header.php';
 <?php else: ?>
 <div class="alert-warn">
     <h1>Vous n'êtes pas connecté</h1>
-    <p>Gérez et publiez vos événements en toute simplicité avec <?= SITE_NAME ?> !</p>
+    <p>Gérez et publiez vos événements en toute simplicité avec <?= htmlspecialchars(SITE_NAME) ?> !</p>
     <hr>
     <ul>
         <li>
