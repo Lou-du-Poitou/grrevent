@@ -10,7 +10,7 @@ class UploadFile
     private string | null $fileTmp = null;
     private string | null $mimeType = null;
 
-    private function getMimeType(): string | false
+    private function getMimeType(): string | bool
     /**
      * Renvoie le mime type du fichier
      * 
