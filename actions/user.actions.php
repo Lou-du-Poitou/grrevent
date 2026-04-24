@@ -8,7 +8,7 @@ require_once './elements/error.exit.php';
 function selectUser(
     PDO $db, 
     string $pseudo
-): User | false
+): User | bool
 /**
  * Permet de sélectionner un utilisateur grâce à son pseudo
  * 
@@ -93,7 +93,7 @@ function followUser(
     PDO $db, 
     int $loggedId, 
     int $userId
-): true
+): bool
 /**
  * Permet à un utilisateur d'en suivre un autre
  * 
@@ -132,7 +132,7 @@ function unfollowUser(
     PDO $db, 
     int $loggedId, 
     int $userId
-): true
+): bool
 /**
  * Permet à un utilisateur de ne plus en suivre un autre
  * 
