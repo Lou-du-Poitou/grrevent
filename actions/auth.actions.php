@@ -13,7 +13,7 @@ function register(
     string $pseudo, 
     string $email, 
     string $password
-): User | false
+): User | bool
 /**
  * Permet d'inscrire un nouvel utilisateur dans la base de données
  * 
