@@ -77,7 +77,7 @@ if (isset($_GET['pseudo'])) {
             $offset = (int)$_GET['offset'];
         }
 
-        if ($offset >= 0) {
+        if ($offset >= 0 && $user) {
             $events = selectUserEvents($db,
                 $user->getValue('userId'),
                 DEFAULT_SELECT_LIMIT,
