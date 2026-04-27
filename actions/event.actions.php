@@ -316,10 +316,10 @@ function selectAddedEvents(
             userLocation,
             userJoinedAt
         FROM UserAddEvent
-        INNER JOIN User
-            ON User.userId = UserAddEvent.userId
         INNER JOIN Event
             ON Event.eventId = UserAddEvent.eventId
+        INNER JOIN User
+            ON User.userId = Event.userId
         WHERE UserAddEvent.userId = :user
         ORDER BY 
             -- En priorité ceux qui ne sont pas passés par date croissante
