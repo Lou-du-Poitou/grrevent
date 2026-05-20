@@ -17,7 +17,7 @@ $titlePage = 'Mot de passe';
 $metaDescription = "Page pour changer votre mot de passe";
 
 // false si on réinitialise le mot de passe (Affichage du formulaire)
-$request = true;
+$requestForm = true;
 
 $erreur = null;
 $success = null;
@@ -34,7 +34,7 @@ if (isset($_GET['token']) && isset($_GET['id'])) {
     }
 
     if ($ok) {
-        $request = false;
+        $requestForm = false;
     }
 }
 
@@ -115,7 +115,7 @@ require './elements/header.php';
     <h1><?= htmlspecialchars($titlePage) ?></h1>
 
     <form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="post">
-        <?php if ($request): ?>
+        <?php if ($requestForm): ?>
         <?= emailInput('email', 'E-mail', $email) ?>
 
         <?php else: ?>
