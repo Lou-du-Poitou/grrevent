@@ -1,6 +1,6 @@
 <?php
 
-class Entity
+abstract class Entity
 /**
  * Entité de l'application (ex: Utilisateur)
  */
