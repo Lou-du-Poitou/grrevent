@@ -21,7 +21,7 @@ $eventDescription = null;
 $eventDate = null;
 $eventLocation = null;
 $eventPlaces = null;
-$eventPicture = DEFAULT_EVENT_PICTURE;
+$eventPicture = htmlspecialchars(DEFAULT_EVENT_PICTURE);
 $authorId = null;
 $authorPseudo = null;
 
