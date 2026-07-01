@@ -44,7 +44,7 @@ define('DB_ERROR_MESSAGE', 'Erreur base de données');
 // SITE
 define('SITE_NAME', 'GrrEvent');
 define('SITE_ICON_PICTURE', '/public/Calendar.png');
-define('SITE_FAVICONS_PATH', '/public/favicons');
+define('SITE_FAVICON_PICTURE', '/public/Calendar.ico');
 
 // EMAIL
 define('FROM_EMAIL_NAME', 'GrrEvent');

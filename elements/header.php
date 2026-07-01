@@ -76,29 +76,21 @@ require_once './elements/nav.php';
     <meta property="og:url" content="<?= htmlspecialchars(HostUrl::path($_SERVER['REQUEST_URI'])) ?>">
     <meta name="theme-color" content="#777777">
 
+    <!-- Icônes du site -->
     <link rel="icon" 
         href="<?= htmlspecialchars(SITE_ICON_PICTURE) ?>"
+        type="image/png"
     >
-
-    <!-- Favicons du site web -->
-    <link rel="icon" 
-        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon.ico" 
+    <link rel="shortcut icon"
+        href="<?= htmlspecialchars(SITE_FAVICON_PICTURE) ?>"
         type="image/x-icon"
     >
-    <link rel="icon" 
-        type="image/png" 
-        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon-16x16.png" 
-        sizes="16x16"
-    >
-    <link rel="icon" 
-        type="image/png" 
-        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon-32x32.png" 
-        sizes="32x32"
-    >
 
+    <!-- Ajout du style -->
     <link rel="stylesheet" 
         href="/style/index.css"
     >
+
     <!-- FontAwesome pour les icones -->
     <link rel="stylesheet" 
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
