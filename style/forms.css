@@ -198,3 +198,9 @@
         grid-area: e7;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .form-title {
+        font-size: 1.4rem;
+    }
+}

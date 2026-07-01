@@ -76,3 +76,9 @@
 .auth-form .reset-pass {
     margin: 0 0 10px 0;
 }
+
+@media screen and (max-width: 600px) {
+    .auth-form h1 {
+        font-size: 1.4rem;
+    }
+}
