@@ -44,6 +44,8 @@ if (isset($_GET['id'])) {
             $metaDescription = $event->getValue('eventDescription');
             if ($event->getValue('eventPicture')) {
                 $metaImage = HostUrl::path($event->getValue('eventPicture'));
+            } else {
+                $metaImage = HostUrl::path(DEFAULT_EVENT_PICTURE);
             }
             $metaKeywords = $event->getValue('eventLocation');
 

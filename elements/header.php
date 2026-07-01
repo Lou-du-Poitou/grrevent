@@ -39,6 +39,7 @@ HTML;
 }
 
 if (!isset($titlePage)) $titlePage = SITE_NAME;
+if (!isset($metaImage)) $metaImage = HostUrl::path(SITE_ICON_PICTURE);
 
 $logged = new Logged();
 
@@ -59,9 +60,7 @@ require_once './elements/nav.php';
     <meta property="og:description" content="<?= htmlspecialchars($metaDescription) ?>">
     <?php endif; ?>
 
-    <?php if (isset($metaImage)): ?>
     <meta property="og:image" content="<?= htmlspecialchars($metaImage) ?>">
-    <?php endif ?>
 
     <?php if (isset($metaKeywords)): ?>
     <meta property="og:keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
@@ -77,8 +76,20 @@ require_once './elements/nav.php';
     <meta property="og:url" content="<?= htmlspecialchars(HostUrl::path($_SERVER['REQUEST_URI'])) ?>">
     <meta name="theme-color" content="#777777">
 
+    <!-- Favicons du site web -->
     <link rel="icon" 
-        href="<?= htmlspecialchars(SITE_ICON) ?>"
+        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon.ico" 
+        type="image/x-icon"
+    >
+    <link rel="icon" 
+        type="image/png" 
+        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon-16x16.png" 
+        sizes="16x16"
+    >
+    <link rel="icon" 
+        type="image/png" 
+        href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon-32x32.png" 
+        sizes="32x32"
     >
 
     <link rel="stylesheet" 
@@ -94,7 +105,7 @@ require_once './elements/nav.php';
         <div class="left">
             <img alt="Logo"
                 class="icon"
-                src="<?= htmlspecialchars(SITE_ICON) ?>"
+                src="<?= htmlspecialchars(SITE_ICON_PICTURE) ?>"
             >
             <h1><?= htmlspecialchars(SITE_NAME) ?></h1>
         </div>

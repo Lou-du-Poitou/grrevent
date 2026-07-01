@@ -43,6 +43,8 @@ if (isset($_GET['pseudo'])) {
             $metaDescription = $user->getValue('userBiography');
             if ($user->getValue('userPicture')) {
                 $metaImage = HostUrl::path($user->getValue('userPicture'));
+            } else {
+                $metaImage = HostUrl::path(DEFAULT_USER_PICTURE);
             }
             $metaKeywords = $user->getValue('userLocation');
             $metaAuthor = $user->getValue('userPseudo');

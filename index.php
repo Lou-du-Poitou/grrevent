@@ -15,7 +15,6 @@ require_once './class/utils/HostUrl.php';
 $titlePage = 'Accueil';
 $metaDescription = "Page d'accueil de l'application. Gérez et publiez vos événements en toute simplicité avec " . 
     SITE_NAME . " !";
-$metaImage = HostUrl::path(SITE_ICON);
 
 $logged = new Logged();
 
