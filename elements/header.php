@@ -76,6 +76,10 @@ require_once './elements/nav.php';
     <meta property="og:url" content="<?= htmlspecialchars(HostUrl::path($_SERVER['REQUEST_URI'])) ?>">
     <meta name="theme-color" content="#777777">
 
+    <link rel="icon" 
+        href="<?= htmlspecialchars(SITE_ICON_PICTURE) ?>"
+    >
+
     <!-- Favicons du site web -->
     <link rel="icon" 
         href="<?= htmlspecialchars(SITE_FAVICONS_PATH) ?>/favicon.ico" 
