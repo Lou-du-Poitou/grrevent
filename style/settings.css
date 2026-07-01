@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: unset;
+    list-style-type: none;
+}
+
+/* Variables des différentes couleurs */
+:root {
+    --white: #f8f8f8;
+    --black: #252525;
+    --grey: #dbdbdb;
+    --dark: #000000;
+    --clear: #ffffff;
+    --link: #0000ff;
+    --green: #0e990e;
+    --red: #990e0e;
+    --yellow: #99990e;
+
+    --header: #eeeeee;
+}
+
+body {
+    min-width: 320px;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.95rem;
+}
+
+p > a, label > a, li > a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+p > a:hover, label > a:hover {
+    text-decoration: underline;
+}
+
+button, img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+}
+
+.success, .warning, .error {
+    font-weight: 600;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.success {
+    color: var(--green);
+}
+
+.warning {
+    color: var(--yellow);
+}
+
+.error {
+    color: var(--red);
+}
+
+::selection {
+    color: var(--grey);
+    background-color: var(--black);
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+}

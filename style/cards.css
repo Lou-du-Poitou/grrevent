@@ -1,0 +1,127 @@
+/* Cards utilisateur/événement */
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Carte event */
+.card {
+    width: 235px;
+    border: 2px solid var(--grey);
+    border-radius: 25px;
+    background-color: var(--header);
+    text-align: center;
+    padding: 20px;
+    transition-duration: 0.4s;
+}
+
+.card:hover {
+    box-shadow: 0 0 8px 1px var(--grey);
+}
+
+/* titre */
+.card .card-title {
+    padding: 8px;
+    font-weight: bold;
+    background-color: var(--white);
+    border: solid 2px var(--grey);
+    border-radius: 25px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card .card-title a {
+    color: var(--black);
+}
+
+/* image */
+.card-image {
+    display: flex;
+    justify-content: center;
+}
+
+.card img {
+    height: 120px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.card .event-pic {
+    width: 100%;
+    border-radius: 25px;
+    object-fit: fill;
+}
+
+.card .user-pic {
+    width: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card .card-infos > p {
+    background-color: var(--white);
+    border: solid 2px var(--grey);
+    padding: 8px;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 120px;
+}
+
+.cards-scroll {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.cards-scroll a {
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.cards-scroll .disabled {
+    pointer-events: none;
+    color: var(--grey);
+}
+
+.card .card-infos > ul {
+    text-align: start;
+    padding: 8px;
+    font-weight: bold;
+    background-color: var(--white);
+    border: solid 2px var(--grey);
+    border-radius: 25px;
+    margin: 10px 0 0 0;
+}
+
+.card .card-infos > ul > li {
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 5px 0;
+    text-overflow: ellipsis;
+}
+
+.cards-container .no-content {
+    display: block;
+    text-align: center;
+    margin: 70px auto;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+    .cards-container {
+        gap: 20px;
+    }
+}

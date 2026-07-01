@@ -1,0 +1,198 @@
+/* En-tête du site */
+header {
+    display: flex;
+    height: 70px;
+    min-width: 320px;
+    background-color: var(--header);
+    border-bottom: solid 2px var(--grey);
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+header .left {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+header .left > h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+header .options {
+    display: flex;
+    /* position: absolute; */
+    /* right: 0; */
+    align-self: center;
+    margin-right: 15px;
+}
+
+header .icon {
+    margin: 0 15px;
+    width: 60px;
+    pointer-events: none;
+}
+
+header .header-item {
+    color: var(--black);
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+header .header-item:hover {
+    background-color: var(--grey);
+}
+
+header .center {
+    margin: 0 auto;
+    align-self: center;
+}
+
+header .center p {
+    font-weight: 600;
+    font-style: italic;
+    font-size: large;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 300px;
+}
+
+/* Menu de navigation */
+nav {
+    display: block;
+    width: 100%;
+    background-color: var(--header);
+    border-bottom: solid 2px var(--grey);
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    top: 70px;
+    transform-origin: top;
+    animation: 0.5s ease-out tobottom;
+}
+
+nav li {
+    display: block;
+    transition-duration: 0.4s;
+    text-indent: 8px;
+}
+
+nav li:hover {
+    background-color: var(--grey);
+}
+
+nav li a {
+    all: unset;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+}
+
+nav ul .active {
+    font-weight: 900;
+    background-color: var(--grey);
+}
+
+/* Cache le menu lorsque la checkbox n'est pas cochée */
+#togglenav:not(:checked) ~ nav {
+    display: none;
+}
+
+/* Ce qui contient le reste du site */
+main {
+    padding: 20px;
+    padding-top: 90px;
+}
+
+/* Responsive pour les téléphones et petits écrans*/
+@media screen and (max-width: 450px) {
+    header .left > h1 {
+        font-size: 1.4rem;
+    }
+
+    header .header-item {
+        padding: 8px 4px;
+        margin: 3px;
+    }
+
+    .profile-container .image-container {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    header .center {
+        opacity: 0;
+        width: 0;
+    }
+
+    header .center * {
+        display: none;
+    }
+}
+
+/* Pour les grands écrans (ordinateurs) */
+@media (min-width: 750px) {
+    nav li {
+        display: inline-block;
+        text-align: center;
+        text-indent: 0;
+        min-width: 150px;
+    }
+}
+
+/* Animation du menu */
+@keyframes tobottom {
+    0% {
+        transform: scaleY(0);
+    } 100% {
+        transform: scaleY(100%);
+    }
+}
+
+/*
+<!-- HTML: -->
+<header>
+    <div class="left">
+        <img alt="Logo"
+            class="icon"
+            src="path_to_icon"
+        >
+        <h1>Nom site</h1>
+    </div>
+    <ul class="options">
+        <li>
+            <a class="nav-item" href="account.php">
+                <i class="fas fa-user"></i>
+            </a>
+        </li>
+        <li>
+            <label class="nav-item">
+                <input id="togglenav" type="checkbox" hidden>
+                <i class="fas fa-bars"></i>
+                <nav>
+                    <ul>
+                        <li class="active">
+                            <a href="/">Accueil</a>
+                        </li>
+                        <!-- Reste des liens -->
+                    </ul>
+                </nav>
+            </label>
+        </li>
+    </ul>
+</header>
+<main>
+    <!-- Reste du site -->
+</main>
+*/

@@ -1,0 +1,200 @@
+/* Formulaire d'une page (par défaut) */
+.form-title {
+    display: block;
+    margin-bottom: 15px;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.form-container {
+    display: grid;
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+}
+
+.form-container input, textarea {
+    margin: 10px 0;
+    outline: none;
+    padding: 8px;
+    border: solid 1px var(--black);
+    border-radius: 5px;
+    background-color: var(--clear);
+    min-width: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.85rem;
+}
+
+.form-container textarea {
+    resize: none;
+    min-height: 100px;
+    max-height: 500px;
+    /* Cette propriété n'existe pas pour 
+     * tous les navigateurs
+     */
+    field-sizing: content;
+}
+
+.form-container input:focus, 
+.form-container textarea:focus {
+    box-shadow: 0 0 8px 1px var(--grey);
+}
+
+.form-container input[type="file"] {
+    cursor: pointer;
+    transition-duration: 0.4s;
+    background-color: var(--header);
+}
+
+.form-container input[type="file"]::file-selector-button {
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    background-color: var(--clear);
+    border: solid 2px var(--grey);
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+
+.form-container input[type="file"]::file-selector-button:hover {
+    background-color: var(--grey);
+}
+
+.form-container button[type='submit'] {
+    color: var(--white);
+    background-color: var(--black);
+    justify-self: center;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    min-width: 138px;
+}
+
+.form-container button[type='submit']:disabled {
+    cursor: not-allowed;
+}
+
+.form-container button[type='submit']:hover:not(:disabled) {
+    text-decoration: underline;
+    background-color: var(--dark);
+    transition-duration: 0.4s;
+}
+
+.form-container .footer a {
+    color: var(--black);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.form-container .footer {
+    margin: 10px 0;
+}
+
+/* Pour les grands écrans seulement */
+@media screen and (min-width: 600px) {
+    /* Formulaire événement */
+    .form-container.event {
+        grid-template-areas: 
+            "e1 e1 e1"
+            "e2 e2 e2"
+            "e3 e4 e5"
+            "e6 e6 e6"
+            "e7 e7 e7"
+            "e8 e8 e8";
+        column-gap: 10px;
+    }
+
+    /* Titre */
+    .form-container.event input[type="text"]:nth-child(1) {
+        grid-area: e1;
+    }
+
+    /* Description */
+    .form-container.event textarea {
+        grid-area: e2;
+    }
+
+    /* Date */
+    .form-container.event input[type="datetime-local"] {
+        grid-area: e3;
+    }
+
+    /* Localisation */
+    .form-container.event input[type="text"]:nth-child(2) {
+        grid-area: e4;
+    }
+
+    /* Places */
+    .form-container.event input[type="number"] {
+        grid-area: e5;
+    }
+
+    /* Image */
+    .form-container.event input[type="file"] {
+        grid-area: e6;
+    }
+
+    /* Bouton */
+    .form-container.event button[type="submit"] {
+        grid-area: e7;
+    }
+
+    /* En cas de message */
+    .form-container.event .error {
+        grid-area: e8;
+    }
+
+    /* Formulaire utilisateur */
+    .form-container.user {
+        grid-template-areas: 
+            "e1 e2"
+            "e3 e3"
+            "e4 e4"
+            "e5 e5"
+            "e6 e6"
+            "e7 e7";
+        column-gap: 10px;
+    }
+
+    /* Nom d'utilisateur */
+    .form-container.user input[type="text"]:nth-child(1) {
+        grid-area: e1;
+    }
+
+    /* Localisation */
+    .form-container.user input[type="text"]:nth-child(2) {
+        grid-area: e2;
+    }
+
+    /* Biographie */
+    .form-container.user textarea {
+        grid-area: e3;
+    }
+
+    /* Image */
+    .form-container.user input[type="file"] {
+        grid-area: e4;
+    }
+
+    /* Bouton */
+    .form-container.user button[type="submit"] {
+        grid-area: e5;
+    }
+
+    /* En cas de message */
+    .form-container.user .error {
+        grid-area: e6;
+    }
+
+    /* Mot de passe */
+    .form-container.user .footer {
+        grid-area: e7;
+    }
+}
