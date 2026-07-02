@@ -40,7 +40,7 @@ HTML;
 }
 
 if (!isset($titlePage)) $titlePage = SITE_NAME;
-if (!isset($metaImage)) $metaImage = HostUrl::path(SITE_ICON_PICTURE);
+if (!isset($metaImage)) $metaImage = HostUrl::path(SITE_PNG_ICON);
 
 $logged = new Logged();
 ?>
@@ -73,11 +73,11 @@ $logged = new Logged();
 
     <!-- Icônes du site -->
     <link rel="icon" 
-        href="<?= htmlspecialchars(SITE_ICON_PICTURE) ?>"
+        href="<?= htmlspecialchars(SITE_PNG_ICON) ?>"
         type="image/png"
     >
     <link rel="shortcut icon"
-        href="<?= htmlspecialchars(SITE_FAVICON_PICTURE) ?>"
+        href="<?= htmlspecialchars(SITE_ICO_ICON) ?>"
         type="image/x-icon"
     >
 
@@ -96,7 +96,7 @@ $logged = new Logged();
         <div class="left">
             <img alt="Logo"
                 class="icon"
-                src="<?= htmlspecialchars(SITE_ICON_PICTURE) ?>"
+                src="<?= htmlspecialchars(SITE_PNG_ICON) ?>"
             >
             <h1><?= htmlspecialchars(SITE_NAME) ?></h1>
         </div>
