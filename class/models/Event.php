@@ -1,6 +1,6 @@
 <?php
-require_once './class/models/Entity.php';
-require_once './class/models/User.php';
+require_once __DIR__ . '/Entity.php';
+require_once __DIR__ . '/User.php';
 
 class Event extends Entity
 /**

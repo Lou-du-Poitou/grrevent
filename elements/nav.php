@@ -1,5 +1,5 @@
 <?php
-require_once './class/utils/Logged.php';
+require_once __DIR__ . '/../class/utils/Logged.php';
 
 function navItem(
     string $link, 

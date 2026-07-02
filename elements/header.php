@@ -6,13 +6,14 @@ L'importer au début à chaques page:
 require './elements/header.php';
 -->
 <?php 
-require_once './config/constants.php';
+require_once __DIR__ . '/../config/constants.php';
 
-require_once './elements/icon.php';
+require_once __DIR__ . '/nav.php';
+require_once __DIR__ . '/icon.php';
 
-require_once './class/models/User.php';
-require_once './class/utils/Logged.php';
-require_once './class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/models/User.php';
+require_once __DIR__ . '/../class/utils/Logged.php';
+require_once __DIR__ . '/../class/utils/HostUrl.php';
 
 function headerItem(string $link, string $iconName): string
 /**
@@ -42,8 +43,6 @@ if (!isset($titlePage)) $titlePage = SITE_NAME;
 if (!isset($metaImage)) $metaImage = HostUrl::path(SITE_ICON_PICTURE);
 
 $logged = new Logged();
-
-require_once './elements/nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -59,17 +58,13 @@ require_once './elements/nav.php';
     <meta name="description" content="<?= htmlspecialchars($metaDescription) ?>">
     <meta property="og:description" content="<?= htmlspecialchars($metaDescription) ?>">
     <?php endif; ?>
-
-    <meta property="og:image" content="<?= htmlspecialchars($metaImage) ?>">
-
     <?php if (isset($metaKeywords)): ?>
     <meta property="og:keywords" content="<?= htmlspecialchars($metaKeywords) ?>">
     <?php endif; ?>
-
     <?php if (isset($metaAuthor)): ?>
     <meta property="og:author" content="<?= htmlspecialchars($metaAuthor) ?>">
     <?php endif; ?>
-    
+    <meta property="og:image" content="<?= htmlspecialchars($metaImage) ?>">
     <meta property="og:title" content="<?= htmlspecialchars($titlePage) ?>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content=<?= htmlspecialchars(str_replace(' ', '', SITE_NAME)) ?>>

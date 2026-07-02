@@ -1,5 +1,5 @@
 <?php
-require_once './config/constants.php';
+require_once __DIR__ . '/../../config/constants.php';
 
 class Mail
 /**

@@ -1,9 +1,9 @@
 <?php
-require_once './class/models/Event.php';
-require_once './class/models/User.php';
-require_once './class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/models/Event.php';
+require_once __DIR__ . '/../class/models/User.php';
+require_once __DIR__ . '/../class/utils/HostUrl.php';
 
-require_once './elements/icon.php';
+require_once __DIR__ . '/icon.php';
 
 /**
  * Les deux cartes Utilisateur/Événement sont très proches

@@ -1,7 +1,7 @@
 <?php
-require_once './config/constants.php';
+require_once __DIR__ . '/../config/constants.php';
 
-require_once './elements/icon.php';
+require_once __DIR__ . '/icon.php';
 
 function textInput(
     string $name, 

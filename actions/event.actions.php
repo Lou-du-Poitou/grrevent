@@ -1,10 +1,10 @@
 <?php
-require_once './config/connection.php';
+require_once __DIR__ . '/../config/connection.php';
 
-require_once './class/models/User.php';
-require_once './class/models/Event.php';
+require_once __DIR__ . '/../class/models/User.php';
+require_once __DIR__ . '/../class/models/Event.php';
 
-require_once './elements/error.exit.php';
+require_once __DIR__ . '/../elements/error.exit.php';
 
 function selectEvent(
     PDO $db, 

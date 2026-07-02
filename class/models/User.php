@@ -1,5 +1,5 @@
 <?php
-require_once './class/models/Entity.php';
+require_once __DIR__ . '/Entity.php';
 
 class User extends Entity 
 /**

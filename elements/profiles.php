@@ -1,13 +1,13 @@
 <?php
-require_once './elements/inputs.php';
+require_once __DIR__ . '/inputs.php';
 
-require_once './actions/user.actions.php';
-require_once './actions/event.actions.php';
+require_once __DIR__ . '/../actions/user.actions.php';
+require_once __DIR__ . '/../actions/event.actions.php';
 
-require_once './class/models/User.php';
-require_once './class/models/Event.php';
-require_once './class/utils/Logged.php';
-require_once './class/utils/CSRFToken.php';
+require_once __DIR__ . '/../class/models/User.php';
+require_once __DIR__ . '/../class/models/Event.php';
+require_once __DIR__ . '/../class/utils/Logged.php';
+require_once __DIR__ . '/../class/utils/CSRFToken.php';
 
 function backButton(): string
 /**

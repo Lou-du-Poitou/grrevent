@@ -1,16 +1,16 @@
 <?php
-require_once './config/connection.php';
-require_once './config/constants.php';
+require_once __DIR__ . '/../config/connection.php';
+require_once __DIR__ . '/../config/constants.php';
 
-require_once './elements/inputs.php';
-require_once './elements/icon.php';
-require_once './elements/cards.php';
-require_once './elements/select.php';
+require_once __DIR__ . '/../elements/inputs.php';
+require_once __DIR__ . '/../elements/icon.php';
+require_once __DIR__ . '/../elements/cards.php';
+require_once __DIR__ . '/../elements/select.php';
 
-require_once './actions/user.actions.php';
-require_once './actions/event.actions.php';
+require_once __DIR__ . '/../actions/user.actions.php';
+require_once __DIR__ . '/../actions/event.actions.php';
 
-require_once './class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostUrl.php';
 
 // Paramètres passé au header
 $titlePage = 'Recherches';
@@ -77,7 +77,7 @@ if (isset($_GET['q']) && !empty($type)) {
     }
 }
 
-require './elements/header.php';
+require __DIR__ . '/../elements/header.php';
 ?>
 <div class="container">
     <form action="" action="get" class="search-part">
@@ -93,4 +93,4 @@ require './elements/header.php';
 
     <?php endif ?>
 </div>
-<?php require './elements/footer.php' ?>
+<?php require __DIR__ . '/../elements/footer.php' ?>

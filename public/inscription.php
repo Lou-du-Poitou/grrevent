@@ -1,13 +1,13 @@
 <?php 
-require_once './config/connection.php';
-require_once './config/constants.php';
+require_once __DIR__ . '/../config/connection.php';
+require_once __DIR__ . '/../config/constants.php';
 
-require_once './elements/inputs.php';
+require_once __DIR__ . '/../elements/inputs.php';
 
-require_once './actions/auth.actions.php';
+require_once __DIR__ . '/../actions/auth.actions.php';
 
-require_once './class/utils/Logged.php';
-require_once './class/others/FormMessage.php';
+require_once __DIR__ . '/../class/utils/Logged.php';
+require_once __DIR__ . '/../class/others/FormMessage.php';
 
 // Paramètres passés au header
 $titlePage = 'Inscription';
@@ -78,7 +78,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER
     }
 }
 
-require './elements/header.php'; 
+require __DIR__ . '/../elements/header.php'; 
 ?>
 <div class="auth-form">
     <h1><?= htmlspecialchars($titlePage) ?></h1>
@@ -112,4 +112,4 @@ require './elements/header.php';
 
     <p class="footer">Vous avez déjà un compte ? <a href="connexion.php">Se connecter</a></p>
 </div>
-<?php require './elements/footer.php' ?>
+<?php require __DIR__ . '/../elements/footer.php' ?>

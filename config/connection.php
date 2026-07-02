@@ -1,6 +1,6 @@
 <?php
-require_once './config/constants.php';
-require_once './elements/error.exit.php';
+require_once __DIR__ . '/constants.php';
+require_once __DIR__ . '/../elements/error.exit.php';
 
 function connection() {
     $db = null;

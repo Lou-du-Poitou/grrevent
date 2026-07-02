@@ -15,13 +15,13 @@ define('MAX_NAME_LENGTH', 35);
 define('MAX_BIOGRAPHY_LENGTH', 500);
 
 // DEFAULT PICTURES
-define('DEFAULT_USER_PICTURE', '/public/Calendar.png');
-define('DEFAULT_EVENT_PICTURE', '/public/Calendar.png');
+define('DEFAULT_USER_PICTURE', '/assets/Calendar.png');
+define('DEFAULT_EVENT_PICTURE', '/assets/Calendar.png');
 
 // UPLOADS
 define('MAX_FILE_UPLOAD', 1000 * 1024); // 1 000 Ko
-define('PICTURE_USER_PATH', '/public/user');
-define('PICTURE_EVENT_PATH', '/public/event');
+define('PICTURE_USER_PATH', '/uploads/user');
+define('PICTURE_EVENT_PATH', '/uploads/event');
 
 // ALLOWED IMAGES FORMATS
 define('IMAGE_FORMATS', [
@@ -43,8 +43,11 @@ define('DB_ERROR_MESSAGE', 'Erreur base de données');
 
 // SITE
 define('SITE_NAME', 'GrrEvent');
-define('SITE_ICON_PICTURE', '/public/Calendar.png');
-define('SITE_FAVICON_PICTURE', '/public/Calendar.ico');
+define('SITE_ICON_PICTURE', '/assets/Calendar.png');
+define('SITE_FAVICON_PICTURE', '/assets/Calendar.ico');
 
 // EMAIL
 define('FROM_EMAIL_NAME', 'GrrEvent');
+
+// ENVIRONMENTS
+define('PRODUCTION_ENV', false);

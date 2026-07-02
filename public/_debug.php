@@ -3,8 +3,13 @@
 déploiement de l'application en production.
 -->
 <?php
-    require_once './class/models/User.php';
-    require_once './class/utils/Logged.php';
+    require_once __DIR__ . '/../config/constants.php';
+
+    // Ne rien afficher en production
+    if (PRODUCTION_ENV) die();
+
+    require_once __DIR__ . '/../class/models/User.php';
+    require_once __DIR__ . '/../class/utils/Logged.php';
     
     session_start();
 

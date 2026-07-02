@@ -1,12 +1,12 @@
 <?php
-require_once './config/connection.php';
+require_once __DIR__ . '/../config/connection.php';
 
-require_once './class/models/User.php';
-require_once './class/utils/Mail.php';
-require_once './class/utils/HostUrl.php';
-require_once './class/others/MailTemplate.php';
+require_once __DIR__ . '/../class/models/User.php';
+require_once __DIR__ . '/../class/utils/Mail.php';
+require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/others/MailTemplate.php';
 
-require_once './elements/error.exit.php';
+require_once __DIR__ . '/../elements/error.exit.php';
 
 function register(
     PDO $db, 

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config/constants.php';
 
 function errorExit(string $message, ?string $err=null): void
 /**
@@ -10,6 +11,9 @@ function errorExit(string $message, ?string $err=null): void
  * @return void (Affichage HTML)
  */
 {
+    // Ne rien afficher en production
+    if (PRODUCTION_ENV) die();
+
     $message = htmlspecialchars($message);
     $err = htmlspecialchars($err);
     

@@ -1,5 +1,5 @@
 <?php
-require_once './class/utils/Session.php';
+require_once __DIR__ . '/../class/utils/Session.php';
 
 Session::clear();
 
