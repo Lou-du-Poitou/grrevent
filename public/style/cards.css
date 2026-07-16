@@ -26,7 +26,7 @@
 .card .card-title {
     padding: 8px;
     font-weight: bold;
-    background-color: var(--white);
+    background-color: var(--clear);
     border: solid 2px var(--grey);
     border-radius: 25px;
     -moz-user-select: none;
@@ -65,7 +65,7 @@
 }
 
 .card .card-infos > p {
-    background-color: var(--white);
+    background-color: var(--clear);
     border: solid 2px var(--grey);
     padding: 8px;
     border-radius: 25px;
@@ -98,7 +98,7 @@
     text-align: start;
     padding: 8px;
     font-weight: bold;
-    background-color: var(--white);
+    background-color: var(--clear);
     border: solid 2px var(--grey);
     border-radius: 25px;
     margin: 10px 0 0 0;
