@@ -32,8 +32,7 @@
     -moz-user-select: none;
     user-select: none;
     background-color: var(--clear);
-    border: solid 2px var(--grey);
-    border-radius: 25px;
+    border-bottom: solid 2px var(--darkgrey);
     padding: 15px;
 }
 
