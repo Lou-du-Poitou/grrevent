@@ -28,14 +28,11 @@
 
 .part-title {
     margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: solid 2px var(--grey);
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    background-color: var(--clear);
-    border: solid 2px var(--grey);
-    border-radius: 25px;
-    padding: 15px;
-    font-size: 1.5rem;
 }
 
 .alert-warn {
