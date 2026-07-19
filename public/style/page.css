@@ -29,7 +29,7 @@
 .part-title {
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: solid 2px var(--grey);
+    border-bottom: solid 1px var(--black);
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -56,7 +56,7 @@ hr {
     .part-title {
         font-size: 1.4rem;
         text-align: center;
-        padding: 10px;
+        padding-bottom: 10px;
     }
 
     .alert-warn h1 {
