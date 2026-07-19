@@ -29,7 +29,7 @@
 .part-title {
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: solid 1px var(--black);
+    border-bottom: solid 2px var(--grey);
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
