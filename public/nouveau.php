@@ -7,7 +7,7 @@ require_once __DIR__ . '/../elements/inputs.php';
 require_once __DIR__ . '/../actions/event.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
-require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 require_once __DIR__ . '/../class/utils/UploadFile.php';
 require_once __DIR__ . '/../class/utils/CSRFToken.php';
 require_once __DIR__ . '/../class/others/FormMessage.php';
@@ -29,7 +29,7 @@ $places = null;
 $picture = null;
 
 if (
-    isset($_SERVER['HTTP_REFERER']) && 
+    isset($_SERVER['HTTP_REFERER']) && isset($_SERVER['SCRIPT_NAME']) && 
     strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME']) && 
     $logged->is()
 ) {
@@ -128,7 +128,7 @@ if (
     
                 $db = null;
     
-                $eventUrl = HostUrl::pathToEvent($eventId);
+                $eventUrl = HostPath::toEvent($eventId);
                 header("Location: $eventUrl");
             }
         } else {

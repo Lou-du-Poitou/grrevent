@@ -9,7 +9,6 @@ require_once __DIR__ . '/../actions/user.actions.php';
 require_once __DIR__ . '/../actions/event.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
-require_once __DIR__ . '/../class/utils/HostUrl.php';
 
 // Paramètres passés au header
 $titlePage = 'Accueil';
@@ -49,7 +48,10 @@ require __DIR__ . '/../elements/header.php';
 ?>
 <?php if ($logged->is()): ?>
 <div class="container">
-    <?php if (isset($addedEvent) && isset($followedEvents) && isset($offset)): ?>
+    <?php if (
+        isset($addedEvent) && isset($followedEvents) && isset($offset) && 
+        isset($_SERVER['SCRIPT_NAME'])
+    ): ?>
     <h1 class="part-title">Événements ajoutés</h1>
     <?= cardsThread($addedEvent, $_SERVER['SCRIPT_NAME'], $offset, false) ?>
 

@@ -11,6 +11,7 @@ require_once __DIR__ . '/../class/models/Event.php';
 require_once __DIR__ . '/../class/models/User.php';
 require_once __DIR__ . '/../class/utils/Logged.php';
 require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 $logged = new Logged();
 
@@ -105,7 +106,10 @@ require __DIR__ . '/../elements/header.php';
                     <?= $eventTitle ?>
                 </h1>
 
-                <?php if ($logged->is() && isset($_SERVER['REQUEST_URI'])): ?>
+                <?php if (
+                    $logged->is() && 
+                    isset($_SERVER['REQUEST_URI']) && isset($_SERVER['SCRIPT_NAME'])
+                ): ?>
                 <?= addEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isAdded) ?>
 
                 <?php endif ?>
@@ -113,7 +117,7 @@ require __DIR__ . '/../elements/header.php';
 
             <?php if ($logged->is() && 
                 $logged->user()->getValue('userId') === $author->getValue('userId') &&
-                isset($_SERVER['REQUEST_URI'])
+                isset($_SERVER['REQUEST_URI']) && isset($_SERVER['SCRIPT_NAME'])
             ): ?>
             <div class="author-actions">
                 <?= deleteEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI']) ?>
@@ -122,7 +126,7 @@ require __DIR__ . '/../elements/header.php';
 
             <div class="profile-headers">
                 <?= profileHeader('Le', $eventDate) ?>
-                <?= profileHeader('Par', $authorPseudo, HostUrl::pathToUser($authorPseudo)) ?>
+                <?= profileHeader('Par', $authorPseudo, HostPath::toUser($authorPseudo)) ?>
                 <?php if (!empty($eventLocation)): ?>
                 <?= profileHeader('Localisation', $eventLocation) ?>
                 <?php endif ?>

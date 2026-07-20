@@ -47,6 +47,7 @@ define('SITE_PNG_ICON', '/assets/Calendar.png');
 define('SITE_ICO_ICON', '/assets/Calendar.ico');
 
 // EMAIL
+define('FROM_EMAIL', ''); // À configurer
 define('FROM_EMAIL_NAME', 'GrrEvent');
 
 // ENVIRONMENTS

@@ -7,7 +7,7 @@ require_once __DIR__ . '/../elements/inputs.php';
 require_once __DIR__ . '/../actions/user.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
-require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 require_once __DIR__ . '/../class/utils/UploadFile.php';
 require_once __DIR__ . '/../class/utils/CSRFToken.php';
 require_once __DIR__ . '/../class/others/FormMessage.php';
@@ -30,7 +30,7 @@ if ($logged->is()) {
 }
 
 if (
-    isset($_SERVER['HTTP_REFERER']) && 
+    isset($_SERVER['HTTP_REFERER']) && isset($_SERVER['SCRIPT_NAME']) && 
     strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME']) && 
     $logged->is()
 ) {
@@ -123,7 +123,7 @@ if (
                 $logged->setUser($user);
     
                 $userPseudo = $user->getValue('userPseudo');
-                $userUrl = HostUrl::pathToUser($userPseudo);
+                $userUrl = HostPath::toUser($userPseudo);
     
                 header("Location: $userUrl");
             }

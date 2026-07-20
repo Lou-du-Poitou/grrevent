@@ -17,7 +17,10 @@ function navItem(
  */
 {
     $className = '';
-    if (str_contains($link, $_SERVER['SCRIPT_NAME'])) {
+    if (
+        isset($_SERVER['SCRIPT_NAME']) && 
+        str_contains($link, $_SERVER['SCRIPT_NAME'])
+    ) {
         $className .= 'active';
     }
 

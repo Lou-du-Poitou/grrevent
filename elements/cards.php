@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../class/models/Event.php';
 require_once __DIR__ . '/../class/models/User.php';
-require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 require_once __DIR__ . '/icon.php';
 
@@ -38,11 +38,11 @@ function eventCard(Event $event): string
     $authorPseudo = $event->getValue('author')->getHTML('userPseudo');
 
     $eventUrl = htmlspecialchars(
-        HostUrl::pathToEvent($event->getValue('eventId'))
+        HostPath::toEvent($event->getValue('eventId'))
     );
 
     $authorUrl = htmlspecialchars(
-        HostUrl::pathToUser($event->getValue('author')->getValue('userPseudo'))
+        HostPath::toUser($event->getValue('author')->getValue('userPseudo'))
     );
 
     // Génération des infos en dynamique
@@ -123,7 +123,7 @@ function userCard(User $user): string
     $userLocation = $user->getHTML('userLocation');
 
     $userUrl = htmlspecialchars(
-        HostUrl::pathToUser($user->getValue('userPseudo'))
+        HostPath::toUser($user->getValue('userPseudo'))
     );
 
     // Génération des infos en dynamique
@@ -226,7 +226,7 @@ HTML;
         // Précédent
         $previousOffset = $offset - DEFAULT_SELECT_LIMIT;
         $previousLink = htmlspecialchars(
-            HostUrl::offsetQuery($referer, $previousOffset)
+            HostPath::offsetQuery($referer, $previousOffset)
         );
         $previousClass = '';
         if ($previousOffset < 0) {
@@ -240,7 +240,7 @@ HTML;
         // Suivant
         $nextOffset = $offset + DEFAULT_SELECT_LIMIT;
         $nextLink = htmlspecialchars(
-            HostUrl::offsetQuery($referer, $nextOffset)
+            HostPath::offsetQuery($referer, $nextOffset)
         );
         $nextClass = '';
         if (empty($entity)) {

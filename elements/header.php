@@ -14,6 +14,7 @@ require_once __DIR__ . '/icon.php';
 require_once __DIR__ . '/../class/models/User.php';
 require_once __DIR__ . '/../class/utils/Logged.php';
 require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 function headerItem(string $link, string $iconName): string
 /**
@@ -109,7 +110,7 @@ $logged = new Logged();
 
         <ul class="options">
             <?php if ($logged->is()): ?>
-            <?= headerItem(HostUrl::pathToUser($logged->user()->getValue('userPseudo')), 'user') ?>
+            <?= headerItem(HostPath::toUser($logged->user()->getValue('userPseudo')), 'user') ?>
             <?= headerItem('deconnexion.php', 'right-from-bracket') ?>
 
             <?php else: ?>

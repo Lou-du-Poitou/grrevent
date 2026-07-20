@@ -327,7 +327,7 @@ function updateUser(
     $user = null;
 
     try {
-        $updateSql = <<<SQL
+        $updateSql = <<<'SQL'
         UPDATE User SET
             userName = :name,
             userBiography = :biography,
@@ -347,7 +347,7 @@ SQL;
         $state->execute();
         $state->closeCursor();
 
-        $selectSql = <<<SQL
+        $selectSql = <<<'SQL'
         SELECT userId,
             userPseudo,
             userName,

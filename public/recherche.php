@@ -10,7 +10,7 @@ require_once __DIR__ . '/../elements/select.php';
 require_once __DIR__ . '/../actions/user.actions.php';
 require_once __DIR__ . '/../actions/event.actions.php';
 
-require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 // Paramètres passé au header
 $titlePage = 'Recherches';
@@ -89,7 +89,7 @@ require __DIR__ . '/../elements/header.php';
     </form>
 
     <?php if (isset($results) && isset($offset)): ?>
-    <?= cardsThread($results, HostUrl::pathToSearch($query, $type), $offset) ?>
+    <?= cardsThread($results, HostPath::toSearch($query, $type), $offset) ?>
 
     <?php endif ?>
 </div>

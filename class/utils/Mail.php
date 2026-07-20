@@ -11,40 +11,46 @@ class Mail
 {
     private string $to = '';
     private string $subject = '';
-    private string $headers = "From: " . FROM_EMAIL_NAME . "\r\n";
+    private array $headers = [];
     private string $message = '';
 
     public function __construct(string $to, bool $html=false)
     {
         $this->to = $to;
+
+        if (FROM_EMAIL_NAME && FROM_EMAIL) {
+            $this->addHeader('From', FROM_EMAIL_NAME . ' <' . FROM_EMAIL . '>');
+        }
+
         if ($html) {
-            $this->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $this->addHeader('Content-type', 'text/html;charset=UTF-8');
         }
     }
 
-    public function addHeader(string $header): void
+    public function addHeader(string $header, string $value): void
     /**
      * Permet d'ajouter un en-tête au mail
      * 
-     * @var string header
+     * @var string $header
+     * @var string $value
      * 
      * @return void
      */
     {
-        $this->headers .= $header . "\r\n";
+        $this->headers[$header] = $value;
     }
 
     public function addHeaders(array $headers): void
     /**
      * Permet d'ajouter plusieurs en-tête au mail
      * 
-     * @var string header
+     * @var array $headers
      * 
      * @return void
      */
     {
-        foreach ($headers as $header) {
-            $this->addHeader($header);
+        foreach ($headers as $header => $value) {
+            $this->addHeader($header, $value);
         }
     }
 

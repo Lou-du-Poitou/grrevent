@@ -26,7 +26,10 @@ $regex = [
 $pseudo = '';
 $email = '';
 
-if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME'])) {
+if (
+    isset($_SERVER['HTTP_REFERER']) && isset($_SERVER['SCRIPT_NAME']) && 
+    strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME'])
+) {
     if (
         isset($_POST['pseudo']) && !empty($_POST['pseudo']) &&
         isset($_POST['email']) && !empty($_POST['email']) &&

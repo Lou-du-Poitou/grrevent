@@ -223,7 +223,7 @@ SQL;
 
             $state->execute();
 
-            $link = HostUrl::pathPasswordReset($token, $userId); // Lien pour réinitialiser le mot de passe
+            $link = HostUrl::toPasswordReset($token, $userId); // Lien pour réinitialiser le mot de passe
             $template = MailTemplate::requestResetPassword($userPseudo, $link);
 
             $mail = new Mail($email, true);

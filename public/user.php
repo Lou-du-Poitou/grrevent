@@ -9,6 +9,8 @@ require_once __DIR__ . '/../elements/cards.php';
 require_once __DIR__ . '/../actions/user.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
+require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 $logged = new Logged();
 
@@ -113,7 +115,10 @@ require __DIR__ . '/../elements/header.php';
                     <?= $userName ?>
                 </h1>
 
-                <?php if ($logged->is() && isset($_SERVER['REQUEST_URI'])): ?>
+                <?php if (
+                    $logged->is() && 
+                    isset($_SERVER['SCRIPT_NAME']) && isset($_SERVER['REQUEST_URI'])
+                ): ?>
                 <?= followUserHandler($user, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isFollow) ?>
 
                 <?php endif ?>
@@ -139,7 +144,7 @@ require __DIR__ . '/../elements/header.php';
 
     <!-- Événements de l'utilisateur -->
     <?php if (isset($events) && isset($offset)): ?>
-    <?= cardsThread($events, HostUrl::pathToUser($user->getValue('userPseudo')), $offset) ?>
+    <?= cardsThread($events, HostPath::toUser($user->getValue('userPseudo')), $offset) ?>
 
     <?php endif ?>
 </div>

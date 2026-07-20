@@ -8,7 +8,7 @@ require_once __DIR__ . '/../actions/user.actions.php';
 require_once __DIR__ . '/../actions/event.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
-require_once __DIR__ . '/../class/utils/HostUrl.php';
+require_once __DIR__ . '/../class/utils/HostPath.php';
 
 // Paramètres passés au header
 $titlePage = 'Suivis';
@@ -41,9 +41,12 @@ require __DIR__ . '/../elements/header.php';
 ?>
 <?php if ($logged->is()): ?>
 <div class="container">
-    <?php if (isset($users) && isset($offset)): ?>
+    <?php if (
+        isset($users) && isset($offset) && 
+        isset($_SERVER['SCRIPT_NAME'])
+    ): ?>
     <h1 class="part-title">Utilisateurs suivi·es</h1>
-    <?= cardsThread($users, HostUrl::path($_SERVER['SCRIPT_NAME']), $offset) ?>
+    <?= cardsThread($users, HostPath::path($_SERVER['SCRIPT_NAME']), $offset) ?>
 
     <?php endif ?>
 </div>
