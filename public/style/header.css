@@ -79,6 +79,9 @@ nav {
     top: 70px;
     transform-origin: top;
     animation: 0.5s ease-out tobottom;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--black);
 }
 
 nav li {
@@ -104,7 +107,7 @@ nav ul .active {
 }
 
 /* Cache le menu lorsque la checkbox n'est pas cochée */
-#togglenav:not(:checked) ~ nav {
+header:has(#togglenav:not(:checked)) nav {
     display: none;
 }
 

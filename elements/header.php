@@ -122,10 +122,11 @@ $logged = new Logged();
                 <label class="header-item">
                     <input id="togglenav" type="checkbox" hidden>
                     <?= icon('bars') ?>
-                    <?= navMenu($logged) ?>
                 </label>
             </li>
         </ul>
+        
+        <?= navMenu($logged) ?>
     </header>
     <main>
     <!-- Suite -->
