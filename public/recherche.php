@@ -80,7 +80,7 @@ if (isset($_GET['q']) && !empty($type)) {
 require __DIR__ . '/../elements/header.php';
 ?>
 <div class="container">
-    <form action="" action="get" class="search-part">
+    <form action="" method="get" class="search-part">
         <?= searchInput('q', 'Saisissez votre recherche...', $query) ?>
 
         <?= select($types, $get) ?>
