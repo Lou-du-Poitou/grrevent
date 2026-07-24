@@ -15,14 +15,14 @@ require_once __DIR__ . '/../class/utils/HostPath.php';
 
 $logged = new Logged();
 
-// Initialisation des variables d'affichage
+// Initialisation des données de l'événement
 $eventId = 0;
 $eventTitle = null;
 $eventDescription = null;
 $eventDate = null;
 $eventLocation = null;
 $eventPlaces = null;
-$eventPicture = htmlspecialchars(DEFAULT_EVENT_PICTURE);
+$eventPicture = DEFAULT_EVENT_PICTURE;
 $authorId = null;
 $authorPseudo = null;
 
@@ -40,44 +40,40 @@ if (isset($_GET['id'])) {
         $event = selectEvent($db, $id);
 
         if ($event) {
+            // Modification des données de l'événement
+            $eventId = $event->getValue('eventId');
+            $eventTitle = $event->getValue('eventTitle');
+            $eventDescription = $event->getValue('eventDescription');
+            $eventDate = date_format(
+                date_create($event->getValue('eventDate')),
+                'd/m/Y à H\hi'
+            );
+            $eventLocation = $event->getValue('eventLocation');
+            $eventPlaces = $event->getValue('eventPlaces');
+            $eventPicture = $event->getValue('eventPicture') ? 
+                $event->getValue('eventPicture') : 
+                $eventPicture;
+
+            $author = $event->getValue('author');
+            $authorId = $author->getValue('userId');
+            $authorPseudo = $author->getValue('userPseudo');
+
             // Paramètres passé au header
-            $titlePage = $event->getValue('eventTitle');
-            $metaDescription = $event->getValue('eventDescription');
-            if ($event->getValue('eventPicture')) {
-                $metaImage = HostUrl::path($event->getValue('eventPicture'));
-            } else {
-                $metaImage = HostUrl::path(DEFAULT_EVENT_PICTURE);
-            }
-            $metaKeywords = $event->getValue('eventLocation');
+            $titlePage = $eventTitle;
+            $metaDescription = $eventDescription;
+            $metaImage = HostUrl::path($eventPicture);
+            $metaKeywords = $eventLocation;
 
             // Initialisation du status d'ajout de l'événement
             if ($logged->is()) {
                 $isAdded = isAddedEvent($db, 
                     $logged->user()->getValue('userId'),
-                    $event->getValue('eventId')
+                    $eventId
                 );
             }
 
-            // Modification des variables d'affichage
-            $eventId = $event->getHTML('eventId');
-            $eventTitle = $event->getHTML('eventTitle');
-            $eventDescription = nl2br($event->getHTML('eventDescription'));
-            $eventDate = date_format(
-                date_create($event->getValue('eventDate')),
-                'd/m/Y à H\hi'
-            );
-            $eventLocation = $event->getHTML('eventLocation');
-            $eventPlaces = $event->getHTML('eventPlaces');
-            if (!empty($event->getValue('eventPicture'))) {
-                $eventPicture = $event->getHTML('eventPicture');
-            }
-
-            $author = $event->getValue('author');
-            $authorId = $author->getHTML('userId');
-            $authorPseudo = $author->getHTML('userPseudo');
-
             // Paramètre passé au header
-            $metaAuthor = $author->getValue('userPseudo');
+            $metaAuthor = $authorPseudo;
         }
 
         $db = null;
@@ -94,33 +90,40 @@ require __DIR__ . '/../elements/header.php';
     <div class="profile-data">
 
         <div class="image-container">
-            <img src="<?= $eventPicture ?>" 
+            <img src="<?= htmlspecialchars($eventPicture) ?>" 
                 class="profile-pic event-pic"
-                alt="Photo de l'événement <?= $eventId ?>"
+                alt="Photo de l'événement <?= htmlspecialchars($eventId) ?>"
             >
         </div>
 
         <div>
             <div class="profile-header">
                 <h1 class="event-title">
-                    <?= $eventTitle ?>
+                    <?= htmlspecialchars($eventTitle) ?>
                 </h1>
 
                 <?php if (
                     $logged->is() && 
                     isset($_SERVER['REQUEST_URI']) && isset($_SERVER['SCRIPT_NAME'])
                 ): ?>
-                <?= addEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isAdded) ?>
+                <?= addEventHandler($event, 
+                    $_SERVER['SCRIPT_NAME'], 
+                    $_SERVER['REQUEST_URI'], 
+                    $isAdded
+                ) ?>
 
                 <?php endif ?>
             </div>
 
             <?php if ($logged->is() && 
-                $logged->user()->getValue('userId') === $author->getValue('userId') &&
+                $logged->user()->getValue('userId') === $authorId &&
                 isset($_SERVER['REQUEST_URI']) && isset($_SERVER['SCRIPT_NAME'])
             ): ?>
             <div class="author-actions">
-                <?= deleteEventHandler($event, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI']) ?>
+                <?= deleteEventHandler($event, 
+                    $_SERVER['SCRIPT_NAME'], 
+                    $_SERVER['REQUEST_URI']
+                ) ?>
             </div>
             <?php endif ?>
 
@@ -136,7 +139,7 @@ require __DIR__ . '/../elements/header.php';
             </div>
 
             <p class="event-description">
-                <?= $eventDescription ?>
+                <?= nl2br(htmlspecialchars($eventDescription)) ?>
             </p>
         </div>
 

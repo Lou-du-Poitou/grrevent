@@ -50,8 +50,6 @@ function navMenu(Logged $logged): string
     );
 
     if ($logged->is()) {
-        $user = $logged->user();
-
         $items .= (
             navItem('/suivis.php', 'Suivis') .
             navItem('/nouveau.php', 'Nouveau') .

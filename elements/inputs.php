@@ -16,7 +16,6 @@ function textInput(
  * @var string $placeholder='' Attribut html placeholder
  * @var string | null $value='' Attribut html value
  * @var ?bool $required=true Champ requis ou non
- * @var ?string $pattern=''
  * 
  * @return string (Composant html)
  */
@@ -288,7 +287,7 @@ function numberInput(
  * 
  * @var string $name Attribut html name
  * @var string $placeholder='' Attribut html placeholder
- * @var string= $value='' Attribut html value
+ * @var string $value='' Attribut html value
  * @var ?int $min=0 Valeur minimal
  * @var ?bool $required=true Champ requis ou non
  * 

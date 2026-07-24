@@ -75,6 +75,7 @@ function followUserHandler(
  * 
  * @var User $user
  * @var string $referer
+ * @var string $requestUri
  * @var bool $isFollow=false
  * 
  * @return string (Composant HTML)
@@ -162,6 +163,7 @@ function addEventHandler(
  * 
  * @var Event $event
  * @var string $referer
+ * @var string $requestUri
  * @var bool $isAdded=false
  * 
  * @return string (Composant HTML)
@@ -248,7 +250,7 @@ function deleteEventHandler(
  * 
  * @var Event $event
  * @var string $referer
- * @var bool $isAdded=false
+ * @var string $requestUri
  * 
  * @return string (Composant HTML)
  */

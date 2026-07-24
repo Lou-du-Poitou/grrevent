@@ -14,11 +14,11 @@ require_once __DIR__ . '/../class/utils/HostPath.php';
 
 $logged = new Logged();
 
-// Initialisation des variables d'affichage
+// Initialisation des données de l'utilisateur
 $userId = 0;
 $userPseudo = null;
 $userName = null;
-$userPicture = htmlspecialchars(DEFAULT_USER_PICTURE);
+$userPicture = DEFAULT_USER_PICTURE;
 $userBiography = null;
 $userLocation = null;
 $userJoinedAt = null;
@@ -40,39 +40,35 @@ if (isset($_GET['pseudo'])) {
         $user = selectUser($db, $pseudo);
 
         if ($user) {
+            // Modification des données de l'utilisateur
+            $userId = $user->getValue('userId');
+            $userPseudo = $user->getValue('userPseudo');
+            $userName = $user->getValue('userName') ? 
+                $user->getValue('userName') : 
+                $user->getValue('userPseudo');
+            $userBiography = $user->getValue('userBiography');
+            $userLocation = $user->getValue('userLocation');
+            $userJoinedAt = date_format(
+                date_create($user->getValue('userJoinedAt')),
+                'd/m/Y'
+            );
+            $userPicture = $user->getValue('userPicture') ? 
+                $user->getValue('userPicture') : 
+                $userPicture;
+
             // Paramètres passé au header
-            $titlePage = 'Profil de ' . $user->getValue('userPseudo');
-            $metaDescription = $user->getValue('userBiography');
-            if ($user->getValue('userPicture')) {
-                $metaImage = HostUrl::path($user->getValue('userPicture'));
-            } else {
-                $metaImage = HostUrl::path(DEFAULT_USER_PICTURE);
-            }
-            $metaKeywords = $user->getValue('userLocation');
-            $metaAuthor = $user->getValue('userPseudo');
+            $titlePage = 'Profil de ' . $userPseudo;
+            $metaDescription = $userBiography;
+            $metaImage = HostUrl::path($userPicture);
+            $metaKeywords = $userLocation;
+            $metaAuthor = $userPseudo;
 
             // Initialisation du suivi de l'utilisateur connecté
             if ($logged->is()) {
                 $isFollow = isFollowUser($db, 
                     $logged->user()->getValue('userId'), 
-                    $user->getValue('userId')
+                    $userId
                 );
-            }
-
-            // Modification des variables d'affichage
-            $userId = $user->getHTML('userId');
-            $userPseudo = $user->getHTML('userPseudo');
-            $userName = empty($user->getValue('userName')) ? 
-                $user->getHTML('userPseudo') : 
-                $user->getHTML('userName');
-            $userBiography = nl2br($user->getHTML('userBiography'));
-            $userLocation = $user->getHTML('userLocation');
-            $userJoinedAt = date_format(
-                date_create($user->getValue('userJoinedAt')),
-                'd/m/Y'
-            );
-            if (!empty($user->getValue('userPicture'))) {
-                $userPicture = $user->getHTML('userPicture');
             }
         }
 
@@ -83,7 +79,7 @@ if (isset($_GET['pseudo'])) {
 
         if ($offset >= 0 && $user) {
             $events = selectUserEvents($db,
-                $user->getValue('userId'),
+                $userId,
                 DEFAULT_SELECT_LIMIT,
                 $offset
             );
@@ -103,29 +99,33 @@ require __DIR__ . '/../elements/header.php';
     <div class="profile-data">
 
         <div class="image-container">
-            <img src="<?= $userPicture ?>" 
+            <img src="<?= htmlspecialchars($userPicture) ?>" 
                 class="profile-pic user-pic"
-                alt="Photo de <?= $userPseudo ?>"
+                alt="Photo de <?= htmlspecialchars($userPseudo) ?>"
             >
         </div>
 
         <div>
             <div class="profile-header">
                 <h1 class="user-name">
-                    <?= $userName ?>
+                    <?= htmlspecialchars($userName) ?>
                 </h1>
 
                 <?php if (
                     $logged->is() && 
                     isset($_SERVER['SCRIPT_NAME']) && isset($_SERVER['REQUEST_URI'])
                 ): ?>
-                <?= followUserHandler($user, $_SERVER['SCRIPT_NAME'], $_SERVER['REQUEST_URI'], $isFollow) ?>
+                <?= followUserHandler($user, 
+                    $_SERVER['SCRIPT_NAME'], 
+                    $_SERVER['REQUEST_URI'], 
+                    $isFollow
+                ) ?>
 
                 <?php endif ?>
             </div>
 
             <p class="user-pseudo">
-                <b>@</b><?= $userPseudo ?>
+                <b>@</b><?= htmlspecialchars($userPseudo) ?>
             </p>
 
             <div class="profile-headers">
@@ -136,7 +136,7 @@ require __DIR__ . '/../elements/header.php';
             </div>
 
             <p class="user-bio">
-                <?= $userBiography ?>
+                <?= nl2br(htmlspecialchars($userBiography)) ?>
             </p>
         </div>
 
@@ -144,7 +144,7 @@ require __DIR__ . '/../elements/header.php';
 
     <!-- Événements de l'utilisateur -->
     <?php if (isset($events) && isset($offset)): ?>
-    <?= cardsThread($events, HostPath::toUser($user->getValue('userPseudo')), $offset) ?>
+    <?= cardsThread($events, HostPath::toUser($userPseudo), $offset) ?>
 
     <?php endif ?>
 </div>

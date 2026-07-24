@@ -25,7 +25,6 @@ if ($logged->is()) {
 
     $name = $user->getValue('userName');
     $biography = $user->getValue('userBiography');
-    $picture = $user->getValue('userPicture');
     $location = $user->getValue('userLocation');
 }
 

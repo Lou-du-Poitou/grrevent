@@ -12,7 +12,7 @@ class Event extends Entity
     protected string $eventDescription;
     protected string $eventDate;
     protected int | null $eventPlaces;
-    protected string $eventLocation;
+    protected string | null $eventLocation;
     protected string | null $eventPicture;
 
     // Utilisateur auteur de l'événement

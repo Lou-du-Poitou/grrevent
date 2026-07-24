@@ -25,13 +25,14 @@ function eventCard(Event $event): string
     $eventId = $event->getHTML('eventId');
     $eventTitle = $event->getHTML('eventTitle');
     $eventDescription = $event->getHTML('eventDescription');
-    $eventPicture = DEFAULT_EVENT_PICTURE;
-    if (!empty($event->getValue('eventPicture'))) {
-        $eventPicture = $event->getHTML('eventPicture');
-    }
-    $eventDate = date_format(
-        date_create($event->getValue('eventDate')),
-        'd/m/Y H\hi'
+    $eventPicture = $event->getValue('eventPicture') ? 
+        $event->getHTML('eventPicture') : 
+        htmlspecialchars(DEFAULT_EVENT_PICTURE);
+    $eventDate = htmlspecialchars(
+        date_format(
+            date_create($event->getValue('eventDate')),
+            'd/m/Y H\hi'
+        )
     );
     $eventLocation = $event->getHTML('eventLocation');
     $eventPlaces = $event->getHTML('eventPlaces');
@@ -116,10 +117,9 @@ function userCard(User $user): string
         $user->getHTML('userName') : 
         $user->getHTML('userPseudo');
     $userBio = $user->getHTML('userBiography');
-    $userPicture = DEFAULT_USER_PICTURE;
-    if (!empty($user->getValue('userPicture'))) {
-        $userPicture = $user->getHTML('userPicture');
-    }
+    $userPicture = $user->getValue('userPicture') ? 
+        $user->getHTML('userPicture') : 
+        htmlspecialchars(DEFAULT_USER_PICTURE);
     $userLocation = $user->getHTML('userLocation');
 
     $userUrl = htmlspecialchars(
