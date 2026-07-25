@@ -20,6 +20,7 @@ Cette application permet de planifier et de référencer des événements. Les �
 - `Uploads` : *Continuer de vérifier et filtrer les fichiers téléchargés afin d'éviter l'injection de scripts malveillants, voir la class UploadFile*
 - `Cookies` : *Attention à conserver une configuration sécurisée des cookies, notamment pour les sessions, voir la class Session*
 - `CSRF` : *Continuer d'utiliser les tokens anti-CSRF sur les formulaires qui exploitent la session de l'utilisateur, voir la class CSRFToken*
+- `Timing` : *Continuer de protéger les actions sensibles contre les attaques temporelles, voir la class AntiTiming*
 - `Production` : *Passer la constante PRODUCTION_ENV à true pour le déploiement en production*
 
 ***/!\ Les fichiers sont documentés, merci de lire cette documentation et de respecter les conventions mises en place.***
