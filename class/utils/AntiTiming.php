@@ -14,7 +14,7 @@ class AntiTiming
 
     public function __construct(float $waitTime)
     /**
-     * @var float $waitTime Temps en milliseconde à attendre
+     * @var float $waitTime Temps en secondes à attendre
      */
     {
         $this->waitTime = $waitTime;

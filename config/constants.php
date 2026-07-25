@@ -55,7 +55,7 @@ define('FROM_EMAIL_NAME', 'GrrEvent');
 
 // ANTI TIMING
 /**
- * Temps d'attente en milliseconde pour 
+ * Temps d'attente en secondes pour 
  * se protéger des attaques timing
  */
 define('DEFAULT_ANTI_TIMING_WAIT', 0.7);
