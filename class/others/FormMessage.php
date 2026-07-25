@@ -18,7 +18,7 @@ class FormMessage
 
     private static $ERRORS = array(
         // Syntaxe
-        'ValidationRegexFail' => "Les données envoyés ne respecte pas le format demandé", 
+        'ValidationRegexFail' => "Les données envoyés ne respectent pas le format demandé", 
 
         // Authentification
         'DuplicateEmailPseudo' => "Email ou pseudo déjà pris", 
