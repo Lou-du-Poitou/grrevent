@@ -14,11 +14,11 @@
 
 .auth-form form {
     display: grid;
-    margin: 20px;
+    margin: 20px 40px;
 }
 
 .auth-form input:not(#cgu-check) {
-    margin: 10px 20px;
+    margin: 10px 0;
     outline: none;
     padding: 8px;
     border: solid 1px var(--black);
@@ -33,7 +33,7 @@
 
 .auth-form .cgu-check {
     justify-self: start;
-    margin: 10px 20px;
+    margin: 10px 0;
 }
 
 .auth-form .cgu-check * {
