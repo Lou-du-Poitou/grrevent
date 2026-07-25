@@ -280,6 +280,16 @@ function deleteEventHandler(
                     $db = connection();
                     
                     deleteEvent($db, $eventId);
+
+                    // Suppression de l'image associée
+                    $eventPicture = $event->getValue('eventPicture');
+                    if (!empty($eventPicture)) {
+                        $picturePath = getcwd() . $eventPicture;
+
+                        if (file_exists($picturePath)) {
+                            unlink($picturePath);
+                        }
+                    }
         
                     $db = null;
         

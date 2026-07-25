@@ -49,6 +49,7 @@ class FormMessage
 
     private static $SUCCESS = array(
         // Authentification
+        'CheckEmailInbox' => "Vérifiez votre boîte mail", 
         'EmailSent' => "Un mail a été envoyé", 
         'PasswordUpdated' => "Votre mot de passe a été changé", 
 

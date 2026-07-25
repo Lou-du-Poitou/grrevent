@@ -20,6 +20,9 @@ define('DEFAULT_EVENT_PICTURE', '/assets/Calendar.png');
 
 // UPLOADS
 define('MAX_FILE_UPLOAD', 1000 * 1024); // 1 000 Ko
+/**
+ * Répertoires à placer dans /public
+ */
 define('PICTURE_USER_PATH', '/uploads/user');
 define('PICTURE_EVENT_PATH', '/uploads/event');
 
@@ -49,6 +52,13 @@ define('SITE_ICO_ICON', '/assets/Calendar.ico');
 // EMAIL
 define('FROM_EMAIL', ''); // À configurer
 define('FROM_EMAIL_NAME', 'GrrEvent');
+
+// ANTI TIMING
+/**
+ * Temps d'attente en milliseconde pour 
+ * se protéger des attaques timing
+ */
+define('DEFAULT_ANTI_TIMING_WAIT', 0.7);
 
 // ENVIRONMENTS
 define('PRODUCTION_ENV', false);
