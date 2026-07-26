@@ -37,7 +37,7 @@ $textColors = [
     $white
 ];
 
-$textFont = 'arial.ttf';
+$textFont = __DIR__ . '/arial.ttf';
 
 $initialPos = 20;
 $letterSpacing = (int)($width / (CAPTCHA_LENGTH + 1));
