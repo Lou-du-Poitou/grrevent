@@ -7,7 +7,6 @@ require_once __DIR__ . '/../elements/inputs.php';
 require_once __DIR__ . '/../actions/auth.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
-require_once __DIR__ . '/../class/utils/AntiTiming.php';
 require_once __DIR__ . '/../class/others/FormMessage.php';
 
 // Paramètres passés au header
@@ -57,9 +56,6 @@ if (
                 // Continue
                 $db = connection();
 
-                $antiTiming = new AntiTiming(DEFAULT_ANTI_TIMING_WAIT);
-                $antiTiming->begin();
-
                 // On vérifie que le pseudo/email n'est pas déjà pris
                 $duplicate = duplicateEmailPseudo($db, $pseudo, $email);
                 if (!$duplicate) {
@@ -76,8 +72,6 @@ if (
                 } else {
                     $erreur = FormMessage::getError('DuplicateEmailPseudo');
                 }
-
-                $antiTiming->end();
 
                 $db = null;
             }
