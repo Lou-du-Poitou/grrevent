@@ -13,6 +13,10 @@ class Captcha
     public function __construct()
     {
         Session::init();
+
+        if (empty($this->get())) {
+            $this->new();
+        }
     }
 
     public function get(): string | null
