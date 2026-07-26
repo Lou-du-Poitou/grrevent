@@ -7,6 +7,7 @@ require_once __DIR__ . '/../elements/inputs.php';
 require_once __DIR__ . '/../actions/auth.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
+require_once __DIR__ . '/../class/utils/Captcha.php';
 require_once __DIR__ . '/../class/others/FormMessage.php';
 
 // Paramètres passés au header
@@ -31,52 +32,67 @@ if (
     strpos($_SERVER['HTTP_REFERER'], $_SERVER['SCRIPT_NAME'])
 ) {
     if (
+        isset($_POST['captcha_key']) &&
         isset($_POST['pseudo']) && !empty($_POST['pseudo']) &&
         isset($_POST['email']) && !empty($_POST['email']) &&
         isset($_POST['password']) && !empty($_POST['password']) &&
         isset($_POST['confirm']) && !empty($_POST['confirm']) &&
-        count($_POST) === 4
+        count($_POST) === 5
     ) {
         $pseudo = $_POST['pseudo'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirm = $_POST['confirm'];
 
-        $ok = true;
-        foreach ($_POST as $key => $value) {
-            if (!preg_match($regex[$key], $value)) {
-                $ok = false;
-            }
-        }
+        // Vérification du captcha
+        $captcha = new Captcha();
+        $captchaCheck = hash_equals(
+            $captcha->get(),
+            strtoupper($_POST['captcha_key'])
+        );
 
-        if ($ok) {
-            if ($password !== $confirm) {
-                $erreur = FormMessage::getError('PasswordNotSame');
-            } else {
-                // Continue
-                $db = connection();
-
-                // On vérifie que le pseudo/email n'est pas déjà pris
-                $duplicate = duplicateEmailPseudo($db, $pseudo, $email);
-                if (!$duplicate) {
-                    $user = register($db, $pseudo, $email, $password);
-
-                    if ($user) {
-                        $logged = new Logged();
-                        $logged->setUser($user);
-
-                        header('Location: index.php');
-                    } else {
-                        $erreur = FormMessage::getError('DataBase');
-                    }
-                } else {
-                    $erreur = FormMessage::getError('DuplicateEmailPseudo');
+        if ($captchaCheck) {
+            // On retire pour éviter les erreurs de regex
+            unset($_POST['captcha_key']);
+    
+            $ok = true;
+            foreach ($_POST as $key => $value) {
+                if (!preg_match($regex[$key], $value)) {
+                    $ok = false;
                 }
-
-                $db = null;
+            }
+    
+            if ($ok) {
+                if ($password !== $confirm) {
+                    $erreur = FormMessage::getError('PasswordNotSame');
+                } else {
+                    // Continue
+                    $db = connection();
+    
+                    // On vérifie que le pseudo/email n'est pas déjà pris
+                    $duplicate = duplicateEmailPseudo($db, $pseudo, $email);
+                    if (!$duplicate) {
+                        $user = register($db, $pseudo, $email, $password);
+    
+                        if ($user) {
+                            $logged = new Logged();
+                            $logged->setUser($user);
+    
+                            header('Location: index.php');
+                        } else {
+                            $erreur = FormMessage::getError('DataBase');
+                        }
+                    } else {
+                        $erreur = FormMessage::getError('DuplicateEmailPseudo');
+                    }
+    
+                    $db = null;
+                }
+            } else {
+                $erreur = FormMessage::getError('ValidationRegexFail');
             }
         } else {
-            $erreur = FormMessage::getError('ValidationRegexFail');
+            $erreur = FormMessage::getError('CaptchaFail');
         }
     }
 }
@@ -104,6 +120,9 @@ require __DIR__ . '/../elements/header.php';
                 <a href="conditions">conditions générales d'utilisation</a>
             </label>
         </span>
+
+        <!-- Captcha -->
+        <?= captchaInput('captcha_key', 'Remplissez le captcha') ?>
 
         <?= buttonInput('Créer un compte', 'submit') ?>
 

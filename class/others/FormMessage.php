@@ -27,6 +27,7 @@ class FormMessage
         'PasswordNotSame' => "Les mots de passe ne correspondent pas", 
         'InvalidToken' => "Token invalide ou expiré", 
         'InvalidCSRFToken' => "Token CSRF invalide",
+        'CaptchaFail' => 'Echec du captcha, réessayez',
 
         // Événement ou Utilisateur
         'InvalidDate' => "Cette date n'est pas valide", 

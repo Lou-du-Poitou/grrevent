@@ -371,3 +371,39 @@ HTML;
 
     return $html;
 }
+
+function captchaInput(
+    string $name, 
+    string $placeholder=''
+): string
+/**
+ * Champ CAPTCHA
+ * 
+ * @var string $name Attribut html name
+ * @var string $placeholder='' Attribut html placeholder
+ * 
+ * @return string (Composant html)
+ */
+{
+    $name = htmlspecialchars($name);
+    $placeholder = htmlspecialchars($placeholder);
+    $imageSrc = htmlspecialchars(CAPTCHA_IMAGE_PATH);
+
+    $html = <<<HTML
+    <div class="captcha-group">
+        <label>
+            <img src="$imageSrc" 
+                alt="Captcha Image"
+            >
+            <input type="text"
+                name="$name"
+                placeholder="$placeholder"
+                title="CAPTCHA"
+                required
+            >
+        </label>
+    </div>
+HTML;
+
+    return $html;
+}

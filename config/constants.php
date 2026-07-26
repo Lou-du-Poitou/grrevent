@@ -60,5 +60,11 @@ define('FROM_EMAIL_NAME', 'GrrEvent');
  */
 define('DEFAULT_ANTI_TIMING_WAIT', 0.7);
 
+// CAPTCHA
+define('CAPTCHA_LENGTH', 6); // Pas plus de 8
+define('CAPTCHA_CHARS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+define('CAPTCHA_CHARS_LENGTH', strlen(CAPTCHA_CHARS));
+define('CAPTCHA_IMAGE_PATH', '/captcha/captcha.php');
+
 // ENVIRONMENTS
 define('PRODUCTION_ENV', false);

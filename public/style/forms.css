@@ -107,7 +107,8 @@
             "e3 e4 e5"
             "e6 e6 e6"
             "e7 e7 e7"
-            "e8 e8 e8";
+            "e8 e8 e8"
+            "e9 e9 e9";
         column-gap: 10px;
     }
 
@@ -141,14 +142,19 @@
         grid-area: e6;
     }
 
+    /* Captcha */
+    .form-container.event .captcha-group {
+        grid-area: e7;
+    }
+
     /* Bouton */
     .form-container.event button[type="submit"] {
-        grid-area: e7;
+        grid-area: e8;
     }
 
     /* En cas de message */
     .form-container.event .error {
-        grid-area: e8;
+        grid-area: e9;
     }
 
     /* Formulaire utilisateur */

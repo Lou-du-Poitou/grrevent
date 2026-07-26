@@ -8,6 +8,7 @@ require_once __DIR__ . '/../actions/auth.actions.php';
 
 require_once __DIR__ . '/../class/utils/Logged.php';
 require_once __DIR__ . '/../class/utils/AntiTiming.php';
+require_once __DIR__ . '/../class/utils/Captcha.php';
 require_once __DIR__ . '/../class/others/FormMessage.php';
 
 $logged = new Logged();
@@ -90,33 +91,45 @@ if (
         // On lance la procédure pour envoyer le token
 
         if (
+            isset($_POST['captcha_key']) &&
             isset($_POST['email']) && !empty($_POST['email']) &&
-            count($_POST) === 1
+            count($_POST) === 2
         ) {
             $email = $_POST['email'];
 
-            $ok = true;
-            if (!preg_match(EMAIL_REGEX, $email)) {
-                $ok = false;
-            }
+            // Vérification du captcha
+            $captcha = new Captcha();
+            $captchaCheck = hash_equals(
+                $captcha->get(),
+                strtoupper($_POST['captcha_key'])
+            );
 
-            if ($ok) {
-                $db = connection();
-
-                $antiTiming = new AntiTiming(DEFAULT_ANTI_TIMING_WAIT);
-                $antiTiming->begin();
-
-                $request = requestResetPassword($db, $email);
-
-                $antiTiming->end();
-
-                // Afficher le succès dans tous les cas pour 
-                // donner le moins d'informations possible
-                $success = FormMessage::getSuccess('CheckEmailInbox');
-
-                $db = null;
+            if ($captchaCheck) {
+                $ok = true;
+                if (!preg_match(EMAIL_REGEX, $email)) {
+                    $ok = false;
+                }
+    
+                if ($ok) {
+                    $db = connection();
+    
+                    $antiTiming = new AntiTiming(DEFAULT_ANTI_TIMING_WAIT);
+                    $antiTiming->begin();
+    
+                    $request = requestResetPassword($db, $email);
+    
+                    $antiTiming->end();
+    
+                    // Afficher le succès dans tous les cas pour 
+                    // donner le moins d'informations possible
+                    $success = FormMessage::getSuccess('CheckEmailInbox');
+    
+                    $db = null;
+                } else {
+                    $erreur = FormMessage::getError('ValidationRegexFail');
+                }
             } else {
-                $erreur = FormMessage::getError('ValidationRegexFail');
+                $erreur = FormMessage::getError('CaptchaFail');
             }
         }
     }
@@ -130,6 +143,9 @@ require __DIR__ . '/../elements/header.php';
     <form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="post">
         <?php if ($requestForm): ?>
         <?= emailInput('email', 'E-mail', $email) ?>
+
+        <!-- Captcha -->
+        <?= captchaInput('captcha_key', 'Remplissez le captcha') ?>
 
         <?php else: ?>
         <?= passwordInput('password', 'Nouveau mot de passe') ?>
