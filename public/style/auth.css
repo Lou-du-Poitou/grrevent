@@ -17,7 +17,7 @@
     margin: 20px 40px;
 }
 
-.auth-form input:not(#cgu-check) {
+.auth-form input:not([type="checkbox"]) {
     margin: 10px 0;
     outline: none;
     padding: 8px;
