@@ -8,6 +8,7 @@ Cette application permet de planifier et de référencer des événements. Les �
 - `/class/*` : *Class utilisables Entités/Utilitaires/Autres*
 - `/config/*` : *Fichiers de configurations Constantes/Base de données*
 - `/elements/*` : *Composants HTML*
+- `/private/*` : *Fichiers privés utiles à l'application*
 - `/public/*` : *Fichiers public Photos/Icônes/Pages*
     - `/assets/*` : *Fichiers statiques, icônes*
     - `/style/*` : *Feuilles de style*
