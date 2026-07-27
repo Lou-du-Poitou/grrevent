@@ -68,7 +68,7 @@ $logged = new Logged();
     <meta property="og:image" content="<?= htmlspecialchars($metaImage) ?>">
     <meta property="og:title" content="<?= htmlspecialchars($titlePage) ?>">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content=<?= htmlspecialchars(str_replace(' ', '', SITE_NAME)) ?>>
+    <meta property="og:site_name" content="<?= htmlspecialchars(str_replace(' ', '', SITE_NAME)) ?>">
     <meta property="og:url" content="<?= htmlspecialchars(HostUrl::path($_SERVER['REQUEST_URI'])) ?>">
     <meta name="theme-color" content="#777777">
 
