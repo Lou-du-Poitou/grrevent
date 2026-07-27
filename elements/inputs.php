@@ -52,7 +52,9 @@ function passwordInput(
  * @return string (Composant html)
  */
 {
-    $regex = str_replace('/', '', PASSWORD_REGEX);
+    $regex = htmlspecialchars(
+        trim(PASSWORD_REGEX, '/')
+    );
 
     $name = htmlspecialchars($name);
     $placeholder = htmlspecialchars($placeholder);
@@ -85,7 +87,9 @@ function emailInput(
  * @return string (Composant html)
  */
 {
-    $regex = str_replace('/', '', EMAIL_REGEX);
+    $regex = htmlspecialchars(
+        trim(EMAIL_REGEX, '/')
+    );
 
     $name = htmlspecialchars($name);
     $placeholder = htmlspecialchars($placeholder);
@@ -119,7 +123,9 @@ function pseudoInput(
  * @return string (Composant html)
  */
 {
-    $regex = str_replace('/', '', PSEUDO_REGEX);
+    $regex = htmlspecialchars(
+        trim(PSEUDO_REGEX, '/')
+    );
 
     $name = htmlspecialchars($name);
     $placeholder = htmlspecialchars($placeholder);
@@ -351,7 +357,7 @@ function hiddenInput(
     string | null $value='', 
 ): string
 /**
- * Champs caché
+ * Champ caché
  * 
  * @var string $name Attribut html name
  * @var string | null $value='' Attribut html value
