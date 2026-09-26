@@ -56,7 +56,7 @@ require __DIR__ . '/../elements/header.php';
     <?= cardsThread($addedEvent, $_SERVER['SCRIPT_NAME'], $offset, false) ?>
 
     <h1 class="part-title">Événements des suivis</h1>
-    <?= cardsThread($followedEvents, $_SERVER['SCRIPT_NAME'], $offset) ?>
+    <?= cardsThread($followedEvents, $_SERVER['SCRIPT_NAME'], $offset, true, empty($addedEvent)) ?>
 
     <?php endif ?>
 </div>
