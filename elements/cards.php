@@ -168,7 +168,13 @@ HTML;
     return $html;
 }
 
-function cardsThread(array $entitys, string $referer, int $offset, bool $scroll=true): string 
+function cardsThread(
+    array $entitys,
+    string $referer,
+    int $offset,
+    bool $scroll=true,
+    bool $disableNext=true
+): string 
 /**
  * Renvoie un fil d'entités sur lequel on peut défiler
  * 
@@ -176,6 +182,7 @@ function cardsThread(array $entitys, string $referer, int $offset, bool $scroll=
  * @var string $referer
  * @var int $offset
  * @var bool $scroll=true
+ * @var bool $disableNext=true
  * 
  * @return string (Composant HTML)
  */
@@ -243,7 +250,7 @@ HTML;
             HostPath::offsetQuery($referer, $nextOffset)
         );
         $nextClass = '';
-        if (empty($entity)) {
+        if ($disableNext && empty($entitys)) {
             $nextClass .= 'disabled';
         }
 
